@@ -9,21 +9,24 @@
 <body>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    // Check if user is already logged in
-    var cookies = document.cookie.split('; ');
-    var isLoggedIn = false;
-    for (var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i].split('=');
-      if (cookie[0] === 'username') {
-        isLoggedIn = true;
-        break;
+    $(window).bind('setup', function () {
+      // Check if user is already logged in
+      var cookies = document.cookie.split('; ');
+      var isLoggedIn = false;
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].split('=');
+        if (cookie[0] === 'username') {
+          isLoggedIn = true;
+          break;
+        }
       }
-    }
-    if (isLoggedIn) {
-      window.location.assign('/dashboard');
-    } else {
-      window.location.assign('/login');
-    }
+      if (isLoggedIn) {
+        window.location.assign('/dashboard');
+      } else {
+        window.location.assign('/login');
+      }
+    });
+
   </script>
 </body>
 

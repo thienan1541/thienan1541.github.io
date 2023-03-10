@@ -63,7 +63,7 @@
         </div>
     </div>
     <script>
-        $(document).ready(function () {
+        $(window).bind('setup', function () {
             // Check if user is already logged in
             var cookies = document.cookie.split('; ');
             var isLoggedIn = false;
@@ -76,7 +76,11 @@
             }
             if (isLoggedIn) {
                 window.location.assign('/dashboard');
+            } else {
+                window.location.assign('/login');
             }
+        });
+        $(document).ready(function () {
             $("#loginForm").submit(function (event) {
                 event.preventDefault();
                 var username = $("#username").val();
