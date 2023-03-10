@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 50px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+    }
+
+    label {
+      margin-bottom: 10px;
+    }
+
+    input {
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+    }
+
+    button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Login</h1>
+    <form id="login-form">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <button type="submit" id="loginBtn">Login</button>
+    </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCNgWkzzEaZiipWBrzEW-LKyxdXOdpeKn8",
+      authDomain: "loginweb-85caf.firebaseapp.com",
+      projectId: "loginweb-85caf",
+      storageBucket: "loginweb-85caf.appspot.com",
+      messagingSenderId: "97002211333",
+      appId: "1:97002211333:web:4da3d46375b20c750a346c",
+      measurementId: "G-YCXET9ZH62",
+      databaseURL:"loginweb-85caf-default-rtdb.firebaseio.com"
+    };
+    firebase.initializeApp(firebaseConfig)
+    // Retrieve user data from localStorage
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      const user = JSON.parse(userData);
+      console.log(user);
+    }
+
+    $('#login-form').submit(function (event) {
+      event.preventDefault();
+
+      // Get the user's email and password
+      var email = $('#email').val();
+      var password = $('#password').val();
+
+      // Authenticate the user's login credentials
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Save user data to session
+          const user = userCredential.user;
+          localStorage.setItem('user', JSON.stringify(user));
+          // Get the current user's UID
+          const uid = firebase.auth().currentUser.uid;
+
+          // Add a custom attribute to the user in the Realtime Database
+          firebase.database().ref('users/' + 'trieu').set({
+            id: user.uid,
+            role: 'admin',
+            password: '123456'
+          })
+            .then(() => {
+              console.log('Custom attribute added to user');
+            })
+            .catch((error) => {
+              console.error('Error adding custom attribute to user:', error);
+            });
+          // Redirect to dashboard
+          //window.location.href = 'dashboard.html';
+          alert('Ok');
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    });
+  </script>
+</body>
+
+</html>
+
+</html>
