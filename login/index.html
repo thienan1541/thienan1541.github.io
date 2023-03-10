@@ -70,12 +70,11 @@
                 var password = $("#password").val();
                 if (username != '' && password != '') {
                     var usersRef = firebase.database().ref("users");
-                    usersRef.orderByChild("username").equalTo(username).once("value")
+                    usersRef.child(username).once("value")
                         .then(function (snapshot) {
                             if (snapshot.exists()) {
                                 var user = snapshot.val();
-                                var userId = Object.keys(user)[0];
-                                if (user[userId].pwd === password) {
+                                if (user.pwd === password) {
                                     // Redirect the user to the home page
                                     window.location.href = window.location.host + "/dashboard";
                                 } else {
