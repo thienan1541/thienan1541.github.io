@@ -44,10 +44,14 @@
         .btn-primary {
             width: 100%;
         }
+
+        .hide-content {
+            display: none;
+        }
     </style>
 </head>
 
-<body>
+<body class="hide-content">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
@@ -85,6 +89,7 @@
         });
         $(document).ready(function () {
             $(window).trigger('setup');
+            $('body').removeClass('hide-content');
             $("#loginForm").submit(function (event) {
                 event.preventDefault();
                 var username = $("#username").val();
