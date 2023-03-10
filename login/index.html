@@ -64,6 +64,19 @@
     </div>
     <script>
         $(document).ready(function () {
+            // Check if user is already logged in
+            var cookies = document.cookie.split('; ');
+            var isLoggedIn = false;
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].split('=');
+                if (cookie[0] === 'username') {
+                    isLoggedIn = true;
+                    break;
+                }
+            }
+            if (isLoggedIn) {
+                window.location.assign('/dashboard');
+            }
             $("#loginForm").submit(function (event) {
                 event.preventDefault();
                 var username = $("#username").val();
@@ -75,8 +88,13 @@
                             if (snapshot.exists()) {
                                 var user = snapshot.val();
                                 if (user.pwd === password) {
+                                    // Store user data in a cookie
+                                    var expirationDate = new Date();
+                                    expirationDate.setDate(expirationDate.getDate() + 7); // expires in 7 days
+                                    document.cookie = "username=" + username + "; expires=" + expirationDate.toUTCString();
+                                    document.cookie = "role=" + user.role + "; expires=" + expirationDate.toUTCString();
                                     // Redirect the user to the home page
-                                    window.location.href = window.location.host + "/dashboard";
+                                    window.location.assign('/dashboard');
                                 } else {
                                     alert("Incorrect password.");
                                 }

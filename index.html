@@ -80,7 +80,7 @@
     if (userData) {
       const user = JSON.parse(userData);
       alert('Data được lấy từ session');
-      window.location.href = 'dashboard';
+      window.location.assign('/dashboard');
       console.log(user);
     }
 
@@ -99,7 +99,7 @@
           localStorage.setItem('user', JSON.stringify(user));
           // Get the current user's UID
           const uid = firebase.auth().currentUser.uid;
-          window.location.href = 'dashboard';
+          window.location.assign('/dashboard');
           alert('Ok');
         })
         .catch((error) => {
