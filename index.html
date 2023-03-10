@@ -62,15 +62,17 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
   <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     const firebaseConfig = {
-      apiKey: "AIzaSyCNgWkzzEaZiipWBrzEW-LKyxdXOdpeKn8",
-      authDomain: "loginweb-85caf.firebaseapp.com",
-      projectId: "loginweb-85caf",
-      storageBucket: "loginweb-85caf.appspot.com",
-      messagingSenderId: "97002211333",
-      appId: "1:97002211333:web:4da3d46375b20c750a346c",
-      measurementId: "G-YCXET9ZH62",
-      databaseURL:"loginweb-85caf-default-rtdb.firebaseio.com"
+      apiKey: "AIzaSyBECKfjMFJ5Kml9FF1F2PVXGi8O1nsYAhs",
+      authDomain: "webdashboard-eecea.firebaseapp.com",
+      projectId: "webdashboard-eecea",
+      storageBucket: "webdashboard-eecea.appspot.com",
+      messagingSenderId: "347419719757",
+      appId: "1:347419719757:web:689dcd1c7cfb97bdeb8404",
+      measurementId: "G-B8CY71NLQE",
+      databaseURL: "webdashboard-eecea-default-rtdb.firebaseio.com"
     };
     firebase.initializeApp(firebaseConfig)
     // Retrieve user data from localStorage
@@ -95,21 +97,7 @@
           localStorage.setItem('user', JSON.stringify(user));
           // Get the current user's UID
           const uid = firebase.auth().currentUser.uid;
-
-          // Add a custom attribute to the user in the Realtime Database
-          firebase.database().ref('users/' + 'trieu').set({
-            id: user.uid,
-            role: 'admin',
-            password: '123456'
-          })
-            .then(() => {
-              console.log('Custom attribute added to user');
-            })
-            .catch((error) => {
-              console.error('Error adding custom attribute to user:', error);
-            });
-          // Redirect to dashboard
-          //window.location.href = 'dashboard.html';
+          window.location.href = 'dashboard.html';
           alert('Ok');
         })
         .catch((error) => {
