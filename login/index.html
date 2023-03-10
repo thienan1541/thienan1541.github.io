@@ -16,6 +16,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Your Firebase configuration details -->
     <script>
         const firebaseConfig = {
@@ -107,14 +108,26 @@
                                     // Redirect the user to the home page
                                     window.location.assign('/dashboard');
                                 } else {
-                                    alert("Incorrect password.");
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Incorrect password.',
+                                    });
                                 }
                             } else {
-                                alert("User does not exist.");
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'User does not exist.',
+                                });
                             }
                         })
                         .catch(function (error) {
-                            alert("Error: " + error.message);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: error.message + '.',
+                            });
                         });
                 } else {
                     alert("Please enter username and password.");
