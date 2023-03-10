@@ -102,9 +102,8 @@
                                     // Store user data in a cookie
                                     var expirationDate = new Date();
                                     expirationDate.setDate(expirationDate.getDate() + 7); // expires in 7 days
-                                    document.cookie = "username=" + username + "; expires=" + expirationDate.toUTCString();
-                                    document.cookie = "role=" + user.role + "; expires=" + expirationDate.toUTCString();
-                                    document.cookie = "path=/";
+                                    document.cookie = "username=" + username + "; expires=" + expirationDate.toUTCString() + '; path=/';
+                                    document.cookie = "role=" + user.role + "; expires=" + expirationDate.toUTCString() + '; path=/';
                                     // Redirect the user to the home page
                                     window.location.assign('/dashboard');
                                 } else {
