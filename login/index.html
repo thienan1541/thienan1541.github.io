@@ -75,7 +75,7 @@
                             if (snapshot.exists()) {
                                 var user = snapshot.val();
                                 var userId = Object.keys(user)[0];
-                                if (user[userId].password === password) {
+                                if (user[userId].pwd === password) {
                                     // Redirect the user to the home page
                                     window.location.href = "dashboard";
                                 } else {
