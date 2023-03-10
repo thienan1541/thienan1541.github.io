@@ -50,8 +50,8 @@
             <div class="col-md-6 col-lg-4">
                 <form id="loginForm">
                     <div class="form-group">
-                        <label for="email">Email address:</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <label for="username">username address:</label>
+                        <input type="username" class="form-control" id="username" name="username" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password:</label>
@@ -66,9 +66,9 @@
         $(document).ready(function () {
             $("#loginForm").submit(function (event) {
                 event.preventDefault();
-                var email = $("#email").val();
+                var username = $("#username").val();
                 var password = $("#password").val();
-                if (email != '' && password != '') {
+                if (username != '' && password != '') {
                     var usersRef = firebase.database().ref("users");
                     usersRef.orderByChild("username").equalTo(username).once("value")
                         .then(function (snapshot) {
@@ -89,7 +89,7 @@
                             alert("Error: " + error.message);
                         });
                 } else {
-                    alert("Please enter email and password.");
+                    alert("Please enter username and password.");
                 }
             });
         });
