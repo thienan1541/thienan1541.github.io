@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Firebase JavaScript SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+    <!-- Your Firebase configuration details -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBECKfjMFJ5Kml9FF1F2PVXGi8O1nsYAhs",
+            authDomain: "webdashboard-eecea.firebaseapp.com",
+            projectId: "webdashboard-eecea",
+            storageBucket: "webdashboard-eecea.appspot.com",
+            messagingSenderId: "347419719757",
+            appId: "1:347419719757:web:689dcd1c7cfb97bdeb8404",
+            measurementId: "G-B8CY71NLQE",
+            databaseURL: "webdashboard-eecea-default-rtdb.firebaseio.com"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <!-- CSS styles for the login form -->
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#loginForm").submit(function (event) {
+                event.preventDefault();
+                var email = $("#email").val();
+                var password = $("#password").val();
+                if (email != '' && password != '') {
+                    var usersRef = firebase.database().ref("users");
+                    usersRef.orderByChild("username").equalTo(username).once("value")
+                        .then(function (snapshot) {
+                            if (snapshot.exists()) {
+                                var user = snapshot.val();
+                                var userId = Object.keys(user)[0];
+                                if (user[userId].password === password) {
+                                    // Redirect the user to the home page
+                                    window.location.href = "dashboard";
+                                } else {
+                                    alert("Incorrect password.");
+                                }
+                            } else {
+                                alert("User does not exist.");
+                            }
+                        })
+                        .catch(function (error) {
+                            alert("Error: " + error.message);
+                        });
+                } else {
+                    alert("Please enter email and password.");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

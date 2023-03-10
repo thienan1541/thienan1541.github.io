@@ -79,6 +79,8 @@
     const userData = localStorage.getItem('user');
     if (userData) {
       const user = JSON.parse(userData);
+      alert('Data được lấy từ session');
+      window.location.href = 'dashboard';
       console.log(user);
     }
 
