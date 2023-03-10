@@ -97,7 +97,7 @@
           localStorage.setItem('user', JSON.stringify(user));
           // Get the current user's UID
           const uid = firebase.auth().currentUser.uid;
-          window.location.href = 'dashboard.html';
+          window.location.href = 'dashboard';
           alert('Ok');
         })
         .catch((error) => {
