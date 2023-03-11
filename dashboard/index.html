@@ -144,6 +144,9 @@
         select = document.getElementById('projectTab');
         getData().then((data) => {
             console.log(data);
+            getVersion(data).then((data) => {
+                console.log(data);
+            });
         }).catch((error) => {
             console.error(error);
         });
@@ -200,7 +203,11 @@
     async function getData() {
         let defaultProject = '';
         const snapshot = await databaseConfig.get();
+        let firstKey;
         snapshot.forEach((childSnapshot) => {
+            if (!firstKey) {
+                firstKey = childSnapshot.key;
+            }
             var keystr = childSnapshot.key;
             var value = childSnapshot.val();
             projectConfig[keystr] = value;
@@ -212,7 +219,7 @@
             select.appendChild(opt);
             defaultProject = keystr;
         });
-        return snapshot;
+        return firstKey;
         // databaseConfig.get().then((snapshot) => {
         //     snapshot.forEach((childSnapshot) => {
         //         var keystr = childSnapshot.key;
@@ -249,6 +256,27 @@
 
         // });
         // return $("#projectTab option:first").val();
+    }
+
+    async function getVersion(project) {
+        $('#versionTab').find('option').remove().end();
+        let db = firebase.database(firebase.app(project));
+        let versionOption = document.getElementById('versionTab');
+        let opt = document.createElement('option');
+        opt.value = '';
+        opt.innerHTML = '';
+        versionOption.appendChild(opt);
+        const snapshot = await databaseConfig.get();
+
+        snapshot.forEach((childSnapshot) => {
+            var keystr = childSnapshot.key;
+            //var value = childSnapshot.val();
+            var opt = document.createElement('option');
+            opt.value = keystr;
+            opt.innerHTML = keystr;
+            versionOption.appendChild(opt);
+        })
+        return 1;
     }
 
 
