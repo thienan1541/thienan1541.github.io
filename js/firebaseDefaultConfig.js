@@ -8,3 +8,7 @@ const firebaseConfig = {
     measurementId: "G-B8CY71NLQE",
     databaseURL: "webdashboard-eecea-default-rtdb.firebaseio.com"
 };
+
+const app = firebase.initializeApp(firebaseConfig, 'main');
+const defaultDb = firebase.database(app);
+const databaseConfig = defaultDb.ref('databaseConfig');
