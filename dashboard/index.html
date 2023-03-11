@@ -220,20 +220,20 @@
             }).finally(() => {
                 console.log('Experiment completed');
                 $("#projectTab").val($("#projectTab option:first").val());
-                // $('#versionTab').find('option').remove().end();
-                // let db = firebase.database(firebase.app($('#projectTab').find(":selected").val()));
-                // let versionOption = document.getElementById('versionTab');
-                // db.ref().once('value').then((snapshot) => {
-                //     snapshot.forEach((childSnapshot) => {
-                //         var keystr = childSnapshot.key;
-                //         //var value = childSnapshot.val();
-                //         var opt = document.createElement('option');
-                //         opt.value = keystr;
-                //         opt.innerHTML = keystr;
-                //         versionOption.appendChild(opt);
-                //     })
-                // });
-                // $("#versionTab").val($("#versionTab option:first").val());
+                $('#versionTab').find('option').remove().end();
+                let db = firebase.database(firebase.app($('#projectTab').find(":selected").val()));
+                let versionOption = document.getElementById('versionTab');
+                db.ref().once('value').then((snapshot) => {
+                    snapshot.forEach((childSnapshot) => {
+                        var keystr = childSnapshot.key;
+                        //var value = childSnapshot.val();
+                        var opt = document.createElement('option');
+                        opt.value = keystr;
+                        opt.innerHTML = keystr;
+                        versionOption.appendChild(opt);
+                    })
+                });
+                $("#versionTab").val($("#versionTab option:first").val());
                 // db.ref().child($('#projectTab').find(":selected").val()).child("userdata").get().then((snapshot) => {
                 //     if (snapshot.exists()) {
                 //         $('#dataUser').text(JSON.stringify(snapshot.val()));
@@ -246,19 +246,19 @@
                 // });
             });
 
-            $('#versionTab').find('option').remove().end();
-            let db = firebase.database(firebase.app(defaultProject));
-            let versionOption = document.getElementById('versionTab');
-            db.ref().once('value').then((snapshot) => {
-                snapshot.forEach((childSnapshot) => {
-                    var keystr = childSnapshot.key;
-                    //var value = childSnapshot.val();
-                    var opt = document.createElement('option');
-                    opt.value = keystr;
-                    opt.innerHTML = keystr;
-                    versionOption.appendChild(opt);
-                })
-            });
+            // $('#versionTab').find('option').remove().end();
+            // let db = firebase.database(firebase.app(defaultProject));
+            // let versionOption = document.getElementById('versionTab');
+            // db.ref().once('value').then((snapshot) => {
+            //     snapshot.forEach((childSnapshot) => {
+            //         var keystr = childSnapshot.key;
+            //         //var value = childSnapshot.val();
+            //         var opt = document.createElement('option');
+            //         opt.value = keystr;
+            //         opt.innerHTML = keystr;
+            //         versionOption.appendChild(opt);
+            //     })
+            // });
         });
     }
 
