@@ -206,9 +206,9 @@
         let firstKey;
         let select = document.getElementById('projectTab');
         let opt = document.createElement('option');
-            opt.value = '';
-            opt.innerHTML = '';
-            versionOption.appendChild(opt);
+        opt.value = '';
+        opt.innerHTML = '';
+        select.appendChild(opt);
         snapshot.forEach((childSnapshot) => {
             if (!firstKey) {
                 firstKey = childSnapshot.key;
