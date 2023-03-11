@@ -164,6 +164,8 @@
                 opt.innerHTML = keystr;
                 select.appendChild(opt);
             });
+        }).finally(() => {
+            console.log('Experiment completed');
         });
         $("#projectTab").val($("#projectTab option:first").val());
 
