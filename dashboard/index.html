@@ -166,7 +166,25 @@
                     opt.innerHTML = keystr;
                     versionOption.appendChild(opt);
                 })
+            }).finally(() => {
+                $("#versionTab").val($("#versionTab option:first").val());
+                let version = $('#versionTab').find(":selected").val();
+                let db2 = firebase.database(firebase.app(version));
+
+
+                db2.ref().child(this.value).child("userdata").get().then((snapshot) => {
+                    if (snapshot.exists()) {
+                        $('#dataUser').text(JSON.stringify(snapshot.val()));
+                        console.log(snapshot.val());
+                    } else {
+                        console.log("Current have 0 record.");
+                    }
+                }).catch((error) => {
+                    console.error(error);
+                });
             });
+
+
 
 
             // let databaseConfig = db.ref().child("2_2_9").child("userdata").get().then((snapshot) => {
