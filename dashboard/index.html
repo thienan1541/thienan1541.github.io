@@ -234,12 +234,12 @@
         $("#projectTab").val($("#projectTab option:first").val());
 
         Object.keys(projectConfig).forEach(function (key) {
-            let app = firebase.initializeApp(keye, projectConfig[key]);
+            let app = firebase.initializeApp(keye, "" + projectConfig[key]);
         });
 
 
         $('#projectTab').on('change', function () {
-            let db = firebase.database(this.value);
+            let db = firebase.database("" + this.value);
             let databaseConfig = db.ref().child("2_2_9").child("userdata").get().then((snapshot) => {
                 if (snapshot.exists()) {
                     console.log(snapshot.val());
