@@ -210,12 +210,12 @@
         select = document.getElementById('projectTab');
         databaseConfig.once('value').then((snapshot) => {
             snapshot.forEach((childSnapshot) => {
-                var key = childSnapshot.key;
+                var keystr = childSnapshot.key;
                 var value = childSnapshot.val();
-                Object.assign(projectConfig, {key: value});
+                Object.assign(projectConfig, {keystr : value});
                 var opt = document.createElement('option');
-                opt.value = key;
-                opt.innerHTML = key;
+                opt.value = keystr;
+                opt.innerHTML = keystr;
                 select.appendChild(opt);
                 // console.log(value);
                 // let app = firebase.initializeApp(value, key);
