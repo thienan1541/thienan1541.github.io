@@ -148,47 +148,8 @@
         let defaultProject = '';
         $('#lblUsername').text(document.cookie.split('; ')[0].split('=')[1]);
         select = document.getElementById('projectTab');
-        databaseConfig.once('value').then((snapshot) => {
-            snapshot.forEach((childSnapshot) => {
-                var keystr = childSnapshot.key;
-                var value = childSnapshot.val();
-                projectConfig[keystr] = value;
-                firebase.initializeApp(value, keystr);
-                console.log('initializeApp: ' + keystr);
-                var opt = document.createElement('option');
-                opt.value = keystr;
-                opt.innerHTML = keystr;
-                select.appendChild(opt);
-                defaultProject = keystr;
-            });
-        }).finally(() => {
-            console.log('Experiment completed');
-            $("#projectTab").val($("#projectTab option:first").val());
-            // $('#versionTab').find('option').remove().end();
-            // let db = firebase.database(firebase.app($('#projectTab').find(":selected").val()));
-            // let versionOption = document.getElementById('versionTab');
-            // db.ref().once('value').then((snapshot) => {
-            //     snapshot.forEach((childSnapshot) => {
-            //         var keystr = childSnapshot.key;
-            //         //var value = childSnapshot.val();
-            //         var opt = document.createElement('option');
-            //         opt.value = keystr;
-            //         opt.innerHTML = keystr;
-            //         versionOption.appendChild(opt);
-            //     })
-            // });
-            // $("#versionTab").val($("#versionTab option:first").val());
-            // db.ref().child($('#projectTab').find(":selected").val()).child("userdata").get().then((snapshot) => {
-            //     if (snapshot.exists()) {
-            //         $('#dataUser').text(JSON.stringify(snapshot.val()));
-            //         console.log(snapshot.val());
-            //     } else {
-            //         console.log("Current have 0 record.");
-            //     }
-            // }).catch((error) => {
-            //     console.error(error);
-            // });
-        });
+        asyncCall();
+
 
         console.log(2);
         $('#versionTab').find('option').remove().end();
@@ -253,6 +214,65 @@
             });
         });
     });
+
+
+
+    function resolve() {
+        return new Promise(resolve => {
+            databaseConfig.once('value').then((snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                    var keystr = childSnapshot.key;
+                    var value = childSnapshot.val();
+                    projectConfig[keystr] = value;
+                    firebase.initializeApp(value, keystr);
+                    console.log('initializeApp: ' + keystr);
+                    var opt = document.createElement('option');
+                    opt.value = keystr;
+                    opt.innerHTML = keystr;
+                    select.appendChild(opt);
+                    defaultProject = keystr;
+                });
+            }).finally(() => {
+                console.log('Experiment completed');
+                $("#projectTab").val($("#projectTab option:first").val());
+                // $('#versionTab').find('option').remove().end();
+                // let db = firebase.database(firebase.app($('#projectTab').find(":selected").val()));
+                // let versionOption = document.getElementById('versionTab');
+                // db.ref().once('value').then((snapshot) => {
+                //     snapshot.forEach((childSnapshot) => {
+                //         var keystr = childSnapshot.key;
+                //         //var value = childSnapshot.val();
+                //         var opt = document.createElement('option');
+                //         opt.value = keystr;
+                //         opt.innerHTML = keystr;
+                //         versionOption.appendChild(opt);
+                //     })
+                // });
+                // $("#versionTab").val($("#versionTab option:first").val());
+                // db.ref().child($('#projectTab').find(":selected").val()).child("userdata").get().then((snapshot) => {
+                //     if (snapshot.exists()) {
+                //         $('#dataUser').text(JSON.stringify(snapshot.val()));
+                //         console.log(snapshot.val());
+                //     } else {
+                //         console.log("Current have 0 record.");
+                //     }
+                // }).catch((error) => {
+                //     console.error(error);
+                // });
+            });
+        });
+    }
+
+    async function asyncCall() {
+        console.log('calling');
+        const result = await resolve();
+        console.log(result);
+    }
+
+
+
+
+
     function logOut() {
         document.cookie.split(";").forEach(function (c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
         window.location.assign('/login');
