@@ -9,6 +9,7 @@ const firebaseConfig = {
     databaseURL: "webdashboard-eecea-default-rtdb.firebaseio.com"
 };
 
+//Default conffig
 const app = firebase.initializeApp(firebaseConfig, 'main');
 const defaultDb = firebase.database(app);
 const databaseConfig = defaultDb.ref('databaseConfig');
