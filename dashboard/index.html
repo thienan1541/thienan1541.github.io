@@ -158,6 +158,7 @@
             $('#dataUser').text(''); 
             if (this.value === '') return;
             // get data 1
+            firebase.app(this.value).goOnline();
             const db = firebase.database(firebase.app(this.value));
             db.goOnline();
             let versionOption = document.getElementById('versionTab');
