@@ -70,51 +70,14 @@
                     let databaseConfig = db.ref().child("2_2_9").child("userdata").get().then((snapshot) => {
                         if (snapshot.exists()) {
                             console.log(snapshot.val());
-                            allData = snapshot.val();
-                            console.log(allData);
                         } else {
-                            console.log("No data available");
+                            console.log("Current have 0 record.");
                         }
                     }).catch((error) => {
                         console.error(error);
                     });
-                    // firebaseAppManager.initializeApp(childSnapshot.key, childSnapshot.val());
-                    // const app2 = firebaseAppManager.getApp(childSnapshot.key);
-                    // let database = firebase.database(app2);
-                    // let version = '2_2_9';
-                    // let dataPattern = 'userdata';
-                    // let ver2 = database.ref(version).child(dataPattern).get().then(function (snapshot) {
-                    //     snapshot.forEach((childSnapshot) => {
-                    //         var key = childSnapshot.key;
-                    //         var value = childSnapshot.val();
-                    //     });
-                    // }).catch(function (error) {
-                    //     console.log(error);
-                    // });;
                 });
             });
-
-            // databaseConfig.once('value', (snapshot) => {
-            //     snapshot.forEach((childSnapshot) => {
-            //         var key = childSnapshot.key;
-            //         var value = childSnapshot.val();
-            //         // firebaseAppManager.initializeApp(childSnapshot.key, childSnapshot.val());
-            //         // const app2 = firebaseAppManager.getApp(childSnapshot.key);
-            //         // let database = firebase.database(app2);
-            //         // let version = '2_2_9';
-            //         // let dataPattern = 'userdata';
-            //         // let ver2 = database.ref(version).child(dataPattern).get().then(function (snapshot) {
-            //         //     snapshot.forEach((childSnapshot) => {
-            //         //         var key = childSnapshot.key;
-            //         //         var value = childSnapshot.val();
-            //         //     });
-            //         // }).catch(function (error) {
-            //         //     console.log(error);
-            //         // });;
-            //     });
-
-
-            // });
         });
     </script>
 </body>
