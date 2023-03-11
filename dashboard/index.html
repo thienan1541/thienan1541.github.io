@@ -145,26 +145,10 @@
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar, #content').toggleClass('active');
         });
-        let defaultProject = '';
         $('#lblUsername').text(document.cookie.split('; ')[0].split('=')[1]);
         select = document.getElementById('projectTab');
         asyncCall();
 
-
-        console.log(2);
-        $('#versionTab').find('option').remove().end();
-        let db = firebase.database(firebase.app(defaultProject));
-        let versionOption = document.getElementById('versionTab');
-        db.ref().once('value').then((snapshot) => {
-            snapshot.forEach((childSnapshot) => {
-                var keystr = childSnapshot.key;
-                //var value = childSnapshot.val();
-                var opt = document.createElement('option');
-                opt.value = keystr;
-                opt.innerHTML = keystr;
-                versionOption.appendChild(opt);
-            })
-        });
 
 
 
@@ -219,6 +203,7 @@
 
     function resolve() {
         return new Promise(resolve => {
+            let defaultProject = '';
             databaseConfig.once('value').then((snapshot) => {
                 snapshot.forEach((childSnapshot) => {
                     var keystr = childSnapshot.key;
@@ -259,6 +244,20 @@
                 // }).catch((error) => {
                 //     console.error(error);
                 // });
+            });
+
+            $('#versionTab').find('option').remove().end();
+            let db = firebase.database(firebase.app(defaultProject));
+            let versionOption = document.getElementById('versionTab');
+            db.ref().once('value').then((snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                    var keystr = childSnapshot.key;
+                    //var value = childSnapshot.val();
+                    var opt = document.createElement('option');
+                    opt.value = keystr;
+                    opt.innerHTML = keystr;
+                    versionOption.appendChild(opt);
+                })
             });
         });
     }
