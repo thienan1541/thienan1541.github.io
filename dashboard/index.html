@@ -212,7 +212,7 @@
             snapshot.forEach((childSnapshot) => {
                 var keystr = childSnapshot.key;
                 var value = childSnapshot.val();
-                Object.assign(projectConfig, {keystr : value});
+                projectConfig[keystr] = value;
                 var opt = document.createElement('option');
                 opt.value = keystr;
                 opt.innerHTML = keystr;
