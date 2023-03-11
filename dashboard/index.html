@@ -155,7 +155,8 @@
 
 
         $('#projectTab').on('change', function () {
-            $('#dataUser').text('');
+            $('#dataUser').text(''); 
+            if (this.value === '') return;
             // get data 1
             const db = firebase.database(firebase.app(this.value));
             db.goOnline();
