@@ -144,12 +144,13 @@
         select = document.getElementById('projectTab');
         getData().then((data) => {
             console.log(data);
-            getVersion(data).then((data) => {
-                console.log(data);
-            });
+            // getVersion(data).then((data) => {
+            //     console.log(data);
+            // });
         }).catch((error) => {
             console.error(error);
         });
+        console.log(3);
 
 
 
