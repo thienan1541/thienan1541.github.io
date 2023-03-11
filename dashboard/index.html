@@ -232,8 +232,24 @@
             });
         });
         $("#projectTab").val($("#projectTab option:first").val());
+
+        Object.keys(projectConfig).forEach(function (key) {
+            let app = firebase.initializeApp(keye, projectConfig[key]);
+        });
+
+
         $('#projectTab').on('change', function () {
-            alert(this.value);
+            let app = firebase.getApp(projectConfig[this.value]);
+            let db = firebase.database(app);
+            let databaseConfig = db.ref().child("2_2_9").child("userdata").get().then((snapshot) => {
+                if (snapshot.exists()) {
+                    console.log(snapshot.val());
+                } else {
+                    console.log("Current have 0 record.");
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
         });
         console.log(projectConfig);
     });
