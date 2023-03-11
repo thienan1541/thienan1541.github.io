@@ -199,42 +199,56 @@
 
     async function getData() {
         let defaultProject = '';
-        databaseConfig.get().then((snapshot) => {
-            snapshot.forEach((childSnapshot) => {
-                var keystr = childSnapshot.key;
-                var value = childSnapshot.val();
-                projectConfig[keystr] = value;
-                firebase.initializeApp(value, keystr);
-                console.log('initializeApp: ' + keystr);
-                var opt = document.createElement('option');
-                opt.value = keystr;
-                opt.innerHTML = keystr;
-                select.appendChild(opt);
-                defaultProject = keystr;
-            });
-        }).finally(() => {
-            console.log('Experiment completed');
-            $("#projectTab").val($("#projectTab option:first").val());
-            // $('#versionTab').find('option').remove().end();
-            // let db = firebase.database(firebase.app($('#projectTab').find(":selected").val()));
-            // let versionOption = document.getElementById('versionTab');
-            // let opt = document.createElement('option');
-            // opt.value = '';
-            // opt.innerHTML = '';
-            // versionOption.appendChild(opt);
-            // db.ref().get().then((snapshot) => {
-            //     snapshot.forEach((childSnapshot) => {
-            //         var keystr = childSnapshot.key;
-            //         //var value = childSnapshot.val();
-            //         var opt = document.createElement('option');
-            //         opt.value = keystr;
-            //         opt.innerHTML = keystr;
-            //         versionOption.appendChild(opt);
-            //     })
-            // })
-
+        const snapshot = await databaseConfig.get();
+        snapshot.forEach((childSnapshot) => {
+            var keystr = childSnapshot.key;
+            var value = childSnapshot.val();
+            projectConfig[keystr] = value;
+            firebase.initializeApp(value, keystr);
+            console.log('initializeApp: ' + keystr);
+            var opt = document.createElement('option');
+            opt.value = keystr;
+            opt.innerHTML = keystr;
+            select.appendChild(opt);
+            defaultProject = keystr;
         });
-        return $("#projectTab option:first").val();
+        return snapshot;
+        // databaseConfig.get().then((snapshot) => {
+        //     snapshot.forEach((childSnapshot) => {
+        //         var keystr = childSnapshot.key;
+        //         var value = childSnapshot.val();
+        //         projectConfig[keystr] = value;
+        //         firebase.initializeApp(value, keystr);
+        //         console.log('initializeApp: ' + keystr);
+        //         var opt = document.createElement('option');
+        //         opt.value = keystr;
+        //         opt.innerHTML = keystr;
+        //         select.appendChild(opt);
+        //         defaultProject = keystr;
+        //     });
+        // }).finally(() => {
+        //     console.log('Experiment completed');
+        //     $("#projectTab").val($("#projectTab option:first").val());
+        //     // $('#versionTab').find('option').remove().end();
+        //     // let db = firebase.database(firebase.app($('#projectTab').find(":selected").val()));
+        //     // let versionOption = document.getElementById('versionTab');
+        //     // let opt = document.createElement('option');
+        //     // opt.value = '';
+        //     // opt.innerHTML = '';
+        //     // versionOption.appendChild(opt);
+        //     // db.ref().get().then((snapshot) => {
+        //     //     snapshot.forEach((childSnapshot) => {
+        //     //         var keystr = childSnapshot.key;
+        //     //         //var value = childSnapshot.val();
+        //     //         var opt = document.createElement('option');
+        //     //         opt.value = keystr;
+        //     //         opt.innerHTML = keystr;
+        //     //         versionOption.appendChild(opt);
+        //     //     })
+        //     // })
+
+        // });
+        // return $("#projectTab option:first").val();
     }
 
 
