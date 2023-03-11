@@ -16,7 +16,7 @@
 </body>
 <script>
     $(document).ready(function () {
-        // Check if the cookie exists
+        // Check if the cookie exists or cookie already expried
         if (document.cookie.indexOf("username") === -1) {
             window.location.assign('/login');
         }
