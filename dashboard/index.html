@@ -213,6 +213,8 @@
                 var keystr = childSnapshot.key;
                 var value = childSnapshot.val();
                 projectConfig[keystr] = value;
+                let app = firebase.initializeApp(value, keystr);
+                console.log('initializeApp: ' + key);
                 var opt = document.createElement('option');
                 opt.value = keystr;
                 opt.innerHTML = keystr;
@@ -232,11 +234,6 @@
             });
         });
         $("#projectTab").val($("#projectTab option:first").val());
-
-        Object.keys(projectConfig).forEach(function (key) {
-            let app = firebase.initializeApp(projectConfig[key], "" + key);
-            console.log(key);
-        });
 
 
         $('#projectTab').on('change', function () {
