@@ -5,13 +5,18 @@
 <script src="../js/jquery.min.js"></script>
 <!-- Bootstrap JS -->
 <script src="../js/bootstrap.min.js"></script>
+<!-- Firebase JavaScript SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../js/firebaseDefaultConfig.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="vertical-nav bg-white" id="sidebar">
     <div class="py-4 px-3 mb-4 bg-light">
         <div class="media d-flex align-items-center"><img
-                src="https://www.clipartmax.com/png/small/72-722180_these-are-some-cats-avatar-i-drew-during-my-free-time-black.png" alt="..." width="65"
-                class="mr-3 rounded-circle img-thumbnail shadow-sm">
+                src="https://www.clipartmax.com/png/small/72-722180_these-are-some-cats-avatar-i-drew-during-my-free-time-black.png"
+                alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
             <div class="media-body" style="margin-left: 0.5 em;">
                 <h4 class="m-0" id="lblUsername"></h4>
                 <p class="font-weight-light text-muted mb-0">Web developer</p>
@@ -120,9 +125,9 @@
             </div>
         </div>
     </div>
-   
 
-    
+
+
 
     <!-- <p class="lead text-white mb-0">Build a fixed sidebar using Bootstrap 4 vertical navigation and media objects.</p>
     <p class="lead text-white">Snippet by <a href="https://bootstrapious.com/snippets" class="text-white">
@@ -203,27 +208,27 @@
         $('#lblUsername').text(document.cookie.split('; ')[0].split('=')[1]);
         select = document.getElementById('projectTab');
         databaseConfig.once('value').then((snapshot) => {
-                snapshot.forEach((childSnapshot) => {
-                    var key = childSnapshot.key;
-                    var value = childSnapshot.val();
-                    var opt = document.createElement('option');
-                    opt.value = key;
-                    opt.innerHTML = key;
-                    select.appendChild(opt);
-                    // console.log(value);
-                    // let app = firebase.initializeApp(value, key);
-                    // let db = firebase.database(app);
-                    // let databaseConfig = db.ref().child("2_2_9").child("userdata").get().then((snapshot) => {
-                    //     if (snapshot.exists()) {
-                    //         console.log(snapshot.val());
-                    //     } else {
-                    //         console.log("Current have 0 record.");
-                    //     }
-                    // }).catch((error) => {
-                    //     console.error(error);
-                    // });
-                });
+            snapshot.forEach((childSnapshot) => {
+                var key = childSnapshot.key;
+                var value = childSnapshot.val();
+                var opt = document.createElement('option');
+                opt.value = key;
+                opt.innerHTML = key;
+                select.appendChild(opt);
+                // console.log(value);
+                // let app = firebase.initializeApp(value, key);
+                // let db = firebase.database(app);
+                // let databaseConfig = db.ref().child("2_2_9").child("userdata").get().then((snapshot) => {
+                //     if (snapshot.exists()) {
+                //         console.log(snapshot.val());
+                //     } else {
+                //         console.log("Current have 0 record.");
+                //     }
+                // }).catch((error) => {
+                //     console.error(error);
+                // });
             });
+        });
     });
 </script>
 
