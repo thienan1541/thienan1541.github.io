@@ -86,7 +86,7 @@
 
     <ul class="nav flex-column bg-white mb-0">
         <li class="nav-item">
-            <a href="#" class="nav-link text-dark font-italic">
+            <a id="logout" href="#" class="nav-link text-dark font-italic">
                 <i class="fa fa-chain-broken mr-3 text-primary fa-fw"></i>
                 Logout
             </a>
@@ -125,7 +125,7 @@
             <u>Bootstrapious</u></a>
     </p> -->
     <div class="separator"></div>
-    <!-- <div class="row text-white">
+    <div class="row text-white">
         <div class="col-lg-7">
             <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
                 ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -183,7 +183,7 @@
                 dolor.
             </p>
         </div>
-    </div> -->
+    </div>
 
 </div>
 <script>
@@ -270,6 +270,12 @@
             }).catch((error) => {
                 console.error(error);
             });
+        });
+
+        $("#logout a").click(function () {
+            event.preventDefault();
+            sessionStorage.clear();
+            window.location.assign('/login');
         });
     });
 </script>
