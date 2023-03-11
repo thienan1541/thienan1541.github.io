@@ -158,8 +158,7 @@
         $('#projectTab').on('change', function () {
             $('#dataUser').text('');
             // get data 1
-            const app = firebase.initializeApp(projectConfig[this.value], 'main');
-            let db = firebase.database(app);
+            let db = firebase.database(firebase.app(this.value)).setPersistenceEnabled(true);
             let versionOption = document.getElementById('versionTab');
             $('#versionTab').find('option').remove().end();
             let opt = document.createElement('option');
