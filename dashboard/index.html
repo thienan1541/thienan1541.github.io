@@ -159,7 +159,7 @@
             if (this.value === '') return;
             // get data 1
             firebase.app(this.value).goOnline();
-            const db = firebase.database(firebase.app(this.value));
+            const db = firebase.app(this.value).database();
             db.goOnline();
             let versionOption = document.getElementById('versionTab');
             $('#versionTab').find('option').remove().end();
@@ -187,7 +187,7 @@
             }
             // get data 1
             let project = $('#projectTab').find(":selected").val();
-            const db = firebase.database(firebase.app(project));
+            const db = firebase.app(project).database();
             db.goOnline();
 
 
