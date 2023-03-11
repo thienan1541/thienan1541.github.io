@@ -141,7 +141,6 @@
             $('#sidebar, #content').toggleClass('active');
         });
         $('#lblUsername').text(document.cookie.split('; ')[0].split('=')[1]);
-        select = document.getElementById('projectTab');
         getData().then((data) => {
             console.log(data);
             // getVersion(data).then((data) => {
@@ -205,6 +204,11 @@
         let defaultProject = '';
         const snapshot = await databaseConfig.get();
         let firstKey;
+        let select = document.getElementById('projectTab');
+        let opt = document.createElement('option');
+            opt.value = '';
+            opt.innerHTML = '';
+            versionOption.appendChild(opt);
         snapshot.forEach((childSnapshot) => {
             if (!firstKey) {
                 firstKey = childSnapshot.key;
