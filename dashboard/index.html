@@ -143,6 +143,7 @@
         $('#lblUsername').text(document.cookie.split('; ')[0].split('=')[1]);
         select = document.getElementById('projectTab');
         asyncCall();
+        console.log($('#projectTab').find(":selected").val());
 
 
 
@@ -214,23 +215,23 @@
             }).finally(() => {
                 console.log('Experiment completed');
                 $("#projectTab").val($("#projectTab option:first").val());
-                $('#versionTab').find('option').remove().end();
-                let db = firebase.database(firebase.app($('#projectTab').find(":selected").val()));
-                let versionOption = document.getElementById('versionTab');
-                let opt = document.createElement('option');
-                opt.value = '';
-                opt.innerHTML = '';
-                versionOption.appendChild(opt);
-                db.ref().get().then((snapshot) => {
-                    snapshot.forEach((childSnapshot) => {
-                        var keystr = childSnapshot.key;
-                        //var value = childSnapshot.val();
-                        var opt = document.createElement('option');
-                        opt.value = keystr;
-                        opt.innerHTML = keystr;
-                        versionOption.appendChild(opt);
-                    })
-                })
+                // $('#versionTab').find('option').remove().end();
+                // let db = firebase.database(firebase.app($('#projectTab').find(":selected").val()));
+                // let versionOption = document.getElementById('versionTab');
+                // let opt = document.createElement('option');
+                // opt.value = '';
+                // opt.innerHTML = '';
+                // versionOption.appendChild(opt);
+                // db.ref().get().then((snapshot) => {
+                //     snapshot.forEach((childSnapshot) => {
+                //         var keystr = childSnapshot.key;
+                //         //var value = childSnapshot.val();
+                //         var opt = document.createElement('option');
+                //         opt.value = keystr;
+                //         opt.innerHTML = keystr;
+                //         versionOption.appendChild(opt);
+                //     })
+                // })
 
             });
         });
