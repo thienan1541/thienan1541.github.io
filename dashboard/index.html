@@ -157,7 +157,7 @@
         $('#projectTab').on('change', function () {
             $('#dataUser').text('');
             // get data 1
-            const db = firebase.database(firebase.app(this.value));
+            const db = firebase.database(firebase.app(this.value)).goOnline();
             let versionOption = document.getElementById('versionTab');
             $('#versionTab').find('option').remove().end();
             let opt = document.createElement('option');
@@ -184,7 +184,7 @@
             }
             // get data 1
             let project = $('#projectTab').find(":selected").val();
-            let db = firebase.database(firebase.app(project));
+            let db = firebase.database(firebase.app(project)).goOnline();
 
 
             db.ref().child(this.value).child("userdata").get().then((snapshot) => {
