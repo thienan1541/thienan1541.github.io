@@ -234,7 +234,8 @@
         $("#projectTab").val($("#projectTab option:first").val());
 
         Object.keys(projectConfig).forEach(function (key) {
-            let app = firebase.initializeApp(projectConfig[key], key);
+            let app = firebase.initializeApp(projectConfig[key], "" + key);
+            console.log(key);
         });
 
 
