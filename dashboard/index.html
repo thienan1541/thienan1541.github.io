@@ -213,8 +213,8 @@
                 var keystr = childSnapshot.key;
                 var value = childSnapshot.val();
                 projectConfig[keystr] = value;
-                let app = firebase.initializeApp(value, keystr);
-                console.log('initializeApp: ' + key);
+                firebase.initializeApp(value, keystr);
+                console.log('initializeApp: ' + keystr);
                 var opt = document.createElement('option');
                 opt.value = keystr;
                 opt.innerHTML = keystr;
