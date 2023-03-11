@@ -231,7 +231,7 @@
             // get data 1
             let db = firebase.database(firebase.app(this.value));
             let versionOption = document.getElementById('versionTab');
-            versionOption.find('option').remove().end();
+            $('#versionTab').find('option').remove().end();
             db.ref().once('value').then((snapshot) => {
                 snapshot.forEach((childSnapshot) => {
                     var keystr = childSnapshot.key;
