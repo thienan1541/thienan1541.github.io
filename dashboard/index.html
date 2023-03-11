@@ -232,18 +232,20 @@
                         opt.innerHTML = keystr;
                         versionOption.appendChild(opt);
                     })
+                }).finally(() => {
+                    $("#versionTab").val($("#versionTab option:first").val());
+                    db.ref().child($('#projectTab').find(":selected").val()).child("userdata").get().then((snapshot) => {
+                        if (snapshot.exists()) {
+                            $('#dataUser').text(JSON.stringify(snapshot.val()));
+                            console.log(snapshot.val());
+                        } else {
+                            console.log("Current have 0 record.");
+                        }
+                    }).catch((error) => {
+                        console.error(error);
+                    });
                 });
-                $("#versionTab").val($("#versionTab option:first").val());
-                // db.ref().child($('#projectTab').find(":selected").val()).child("userdata").get().then((snapshot) => {
-                //     if (snapshot.exists()) {
-                //         $('#dataUser').text(JSON.stringify(snapshot.val()));
-                //         console.log(snapshot.val());
-                //     } else {
-                //         console.log("Current have 0 record.");
-                //     }
-                // }).catch((error) => {
-                //     console.error(error);
-                // });
+
             });
 
             // $('#versionTab').find('option').remove().end();
