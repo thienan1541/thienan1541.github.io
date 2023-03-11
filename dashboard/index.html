@@ -111,18 +111,9 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-md-4">
-            <div id="versionTab" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="btn-group mr-2" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-secondary">1.1</button>
-                </div>
-                <div class="btn-group mr-2" role="group" aria-label="Second group">
-                    <button type="button" class="btn btn-secondary">2</button>
-                </div>
-                <div class="btn-group" role="group" aria-label="Third group">
-                    <button type="button" class="btn btn-secondary">2.1</button>
-                </div>
-            </div>
+        <div class="col-md-2">
+            <select id="versionTab" class="form-select" style="width: fit-content;">
+            </select>
         </div>
     </div>
 
@@ -239,7 +230,38 @@
         $('#projectTab').on('change', function () {
             // get data 1
             let db = firebase.database(firebase.app(this.value));
-            let databaseConfig = db.ref().child("2_2_9").child("userdata").get().then((snapshot) => {
+            let versionOption = document.getElementById('versionTab');
+            versionOption.find('option').remove().end();
+            db.ref().once('value').then((snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                    var keystr = childSnapshot.key;
+                    //var value = childSnapshot.val();
+                    var opt = document.createElement('option');
+                    opt.value = keystr;
+                    opt.innerHTML = keystr;
+                    versionOption.appendChild(opt);
+                })
+            });
+
+
+            // let databaseConfig = db.ref().child("2_2_9").child("userdata").get().then((snapshot) => {
+            //     if (snapshot.exists()) {
+            //         console.log(snapshot.val());
+            //     } else {
+            //         console.log("Current have 0 record.");
+            //     }
+            // }).catch((error) => {
+            //     console.error(error);
+            // });
+        });
+
+        $('#versionTab').on('change', function () {
+            // get data 1
+            let project = $('#projectTab').find(":selected").val();
+            let db = firebase.database(firebase.app(project));
+
+
+            db.ref().child(this.value).child("userdata").get().then((snapshot) => {
                 if (snapshot.exists()) {
                     console.log(snapshot.val());
                 } else {
@@ -249,7 +271,6 @@
                 console.error(error);
             });
         });
-        console.log(projectConfig);
     });
 </script>
 
