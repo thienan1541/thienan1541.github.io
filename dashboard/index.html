@@ -266,7 +266,7 @@
         opt.value = '';
         opt.innerHTML = '';
         versionOption.appendChild(opt);
-        const snapshot = await db.get();
+        const snapshot = await db.ref().get();
 
         snapshot.forEach((childSnapshot) => {
             var keystr = childSnapshot.key;
