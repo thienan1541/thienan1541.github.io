@@ -158,34 +158,22 @@
                 opt.value = keystr;
                 opt.innerHTML = keystr;
                 select.appendChild(opt);
-                // console.log(value);
-                // let app = firebase.initializeApp(value, key);
-                // let db = firebase.database(app);
-                // let databaseConfig = db.ref().child("2_2_9").child("userdata").get().then((snapshot) => {
-                //     if (snapshot.exists()) {
-                //         console.log(snapshot.val());
-                //     } else {
-                //         console.log("Current have 0 record.");
-                //     }
-                // }).catch((error) => {
-                //     console.error(error);
-                // });
             });
         });
         $("#projectTab").val($("#projectTab option:first").val());
 
-        $('#versionTab').find('option').remove().end();
-        let db = firebase.database(firebase.app($("#projectTab option:first").val()));
-        db.ref().once('value').then((snapshot) => {
-            snapshot.forEach((childSnapshot) => {
-                var keystr = childSnapshot.key;
-                //var value = childSnapshot.val();
-                var opt = document.createElement('option');
-                opt.value = keystr;
-                opt.innerHTML = keystr;
-                versionOption.appendChild(opt);
-            })
-        });
+        // $('#versionTab').find('option').remove().end();
+        // let db = firebase.database(firebase.app($("#projectTab option:first").val()));
+        // db.ref().once('value').then((snapshot) => {
+        //     snapshot.forEach((childSnapshot) => {
+        //         var keystr = childSnapshot.key;
+        //         //var value = childSnapshot.val();
+        //         var opt = document.createElement('option');
+        //         opt.value = keystr;
+        //         opt.innerHTML = keystr;
+        //         versionOption.appendChild(opt);
+        //     })
+        // });
 
         $('#projectTab').on('change', function () {
             // get data 1
