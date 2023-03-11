@@ -153,6 +153,7 @@
 
 
         $('#projectTab').on('change', function () {
+            $('#dataUser').text('');
             // get data 1
             let db = firebase.database(firebase.app(this.value));
             let versionOption = document.getElementById('versionTab');
@@ -175,6 +176,10 @@
         });
 
         $('#versionTab').on('change', function () {
+            if (this.value === '') {
+                $('#dataUser').text('');
+                return;
+            }
             // get data 1
             let project = $('#projectTab').find(":selected").val();
             let db = firebase.database(firebase.app(project));
