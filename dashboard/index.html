@@ -75,7 +75,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark font-italic" href="#">
+            <a href="#" class="nav-link text-dark font-italic">
                 <i class="fa fa-line-chart mr-3 text-primary fa-fw"></i>
                 Line charts
             </a>
@@ -86,15 +86,10 @@
 
     <ul class="nav flex-column bg-white mb-0">
         <li class="nav-item">
-            <button id="logout" class="nav-link text-dark font-italic" style="border: none;
-            background-color: inherit;
-            padding: 14px 28px;
-            font-size: 16px;
-            cursor: pointer;
-            display: inline-block;">
+            <a id="logout" href="javascript:logOut();" class="nav-link text-dark font-italic">
                 <i class="fa fa-chain-broken mr-3 text-primary fa-fw"></i>
                 Logout
-            </button>
+            </a>
         </li>
     </ul>
 </div>
@@ -180,17 +175,17 @@
                     versionOption.appendChild(opt);
                 })
             });
-            // $("#versionTab").val($("#versionTab option:first").val());
-            // db.ref().child($('#projectTab').find(":selected").val()).child("userdata").get().then((snapshot) => {
-            //     if (snapshot.exists()) {
-            //         $('#dataUser').text(JSON.stringify(snapshot.val()));
-            //         console.log(snapshot.val());
-            //     } else {
-            //         console.log("Current have 0 record.");
-            //     }
-            // }).catch((error) => {
-            //     console.error(error);
-            // });
+            $("#versionTab").val($("#versionTab option:first").val());
+            db.ref().child($('#projectTab').find(":selected").val()).child("userdata").get().then((snapshot) => {
+                if (snapshot.exists()) {
+                    $('#dataUser').text(JSON.stringify(snapshot.val()));
+                    console.log(snapshot.val());
+                } else {
+                    console.log("Current have 0 record.");
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
         });
 
 
@@ -241,13 +236,11 @@
                 console.error(error);
             });
         });
-
-        $("#logout a").click(function () {
-            event.preventDefault();
-            sessionStorage.clear();
-            window.location.assign('/login');
-        });
     });
+    function logOut() {
+        sessionStorage.clear();
+        window.location.assign('/login');
+    }
 </script>
 
 </html>
