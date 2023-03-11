@@ -142,8 +142,11 @@
         });
         $('#lblUsername').text(document.cookie.split('; ')[0].split('=')[1]);
         select = document.getElementById('projectTab');
-        asyncCall();
-        console.log($('#projectTab').find(":selected").val());
+        getData().then((data) => {
+            console.log(data);
+        }).catch((error) => {
+            console.error(error);
+        });
 
 
 
@@ -194,53 +197,44 @@
         });
     });
 
-
-
-    function resolve() {
-        return new Promise(resolve => {
-            let defaultProject = '';
-            databaseConfig.get().then((snapshot) => {
-                snapshot.forEach((childSnapshot) => {
-                    var keystr = childSnapshot.key;
-                    var value = childSnapshot.val();
-                    projectConfig[keystr] = value;
-                    firebase.initializeApp(value, keystr);
-                    console.log('initializeApp: ' + keystr);
-                    var opt = document.createElement('option');
-                    opt.value = keystr;
-                    opt.innerHTML = keystr;
-                    select.appendChild(opt);
-                    defaultProject = keystr;
-                });
-            }).finally(() => {
-                console.log('Experiment completed');
-                $("#projectTab").val($("#projectTab option:first").val());
-                // $('#versionTab').find('option').remove().end();
-                // let db = firebase.database(firebase.app($('#projectTab').find(":selected").val()));
-                // let versionOption = document.getElementById('versionTab');
-                // let opt = document.createElement('option');
-                // opt.value = '';
-                // opt.innerHTML = '';
-                // versionOption.appendChild(opt);
-                // db.ref().get().then((snapshot) => {
-                //     snapshot.forEach((childSnapshot) => {
-                //         var keystr = childSnapshot.key;
-                //         //var value = childSnapshot.val();
-                //         var opt = document.createElement('option');
-                //         opt.value = keystr;
-                //         opt.innerHTML = keystr;
-                //         versionOption.appendChild(opt);
-                //     })
-                // })
-
+    async function getData() {
+        let defaultProject = '';
+        databaseConfig.get().then((snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+                var keystr = childSnapshot.key;
+                var value = childSnapshot.val();
+                projectConfig[keystr] = value;
+                firebase.initializeApp(value, keystr);
+                console.log('initializeApp: ' + keystr);
+                var opt = document.createElement('option');
+                opt.value = keystr;
+                opt.innerHTML = keystr;
+                select.appendChild(opt);
+                defaultProject = keystr;
             });
-        });
-    }
+        }).finally(() => {
+            console.log('Experiment completed');
+            $("#projectTab").val($("#projectTab option:first").val());
+            // $('#versionTab').find('option').remove().end();
+            // let db = firebase.database(firebase.app($('#projectTab').find(":selected").val()));
+            // let versionOption = document.getElementById('versionTab');
+            // let opt = document.createElement('option');
+            // opt.value = '';
+            // opt.innerHTML = '';
+            // versionOption.appendChild(opt);
+            // db.ref().get().then((snapshot) => {
+            //     snapshot.forEach((childSnapshot) => {
+            //         var keystr = childSnapshot.key;
+            //         //var value = childSnapshot.val();
+            //         var opt = document.createElement('option');
+            //         opt.value = keystr;
+            //         opt.innerHTML = keystr;
+            //         versionOption.appendChild(opt);
+            //     })
+            // })
 
-    async function asyncCall() {
-        console.log('calling');
-        const result = await resolve();
-        console.log(result);
+        });
+        return $("#projectTab option:first").val();
     }
 
 
