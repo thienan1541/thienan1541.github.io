@@ -157,6 +157,10 @@
             let db = firebase.database(firebase.app(this.value));
             let versionOption = document.getElementById('versionTab');
             $('#versionTab').find('option').remove().end();
+            let opt = document.createElement('option');
+            opt.value = '';
+            opt.innerHTML = '';
+            versionOption.appendChild(opt);
             db.ref().get().then((snapshot) => {
                 snapshot.forEach((childSnapshot) => {
                     var keystr = childSnapshot.key;
@@ -167,6 +171,7 @@
                     versionOption.appendChild(opt);
                 })
             })
+
         });
 
         $('#versionTab').on('change', function () {
@@ -212,6 +217,10 @@
                 $('#versionTab').find('option').remove().end();
                 let db = firebase.database(firebase.app($('#projectTab').find(":selected").val()));
                 let versionOption = document.getElementById('versionTab');
+                let opt = document.createElement('option');
+                opt.value = '';
+                opt.innerHTML = '';
+                versionOption.appendChild(opt);
                 db.ref().get().then((snapshot) => {
                     snapshot.forEach((childSnapshot) => {
                         var keystr = childSnapshot.key;
