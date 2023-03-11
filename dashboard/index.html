@@ -145,6 +145,7 @@
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar, #content').toggleClass('active');
         });
+        let defaultProject = '';
         $('#lblUsername').text(document.cookie.split('; ')[0].split('=')[1]);
         select = document.getElementById('projectTab');
         databaseConfig.once('value').then((snapshot) => {
@@ -158,6 +159,7 @@
                 opt.value = keystr;
                 opt.innerHTML = keystr;
                 select.appendChild(opt);
+                defaultProject = keystr;
             });
         }).finally(() => {
             console.log('Experiment completed');
@@ -190,7 +192,7 @@
 
 
         $('#versionTab').find('option').remove().end();
-        let db = firebase.database(firebase.app($('#projectTab').find(":selected").val()));
+        let db = firebase.database(firebase.app(defaultProject));
         let versionOption = document.getElementById('versionTab');
         db.ref().once('value').then((snapshot) => {
             snapshot.forEach((childSnapshot) => {
