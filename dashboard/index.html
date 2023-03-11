@@ -93,10 +93,7 @@
         </li>
     </ul>
 </div>
-<!-- End vertical navbar -->
 
-
-<!-- Page content holder -->
 <div class="page-content p-5" id="content">
     <!-- Toggle button -->
     <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i
@@ -122,14 +119,6 @@
             </select>
         </div>
     </div>
-
-
-
-
-    <!-- <p class="lead text-white mb-0">Build a fixed sidebar using Bootstrap 4 vertical navigation and media objects.</p>
-    <p class="lead text-white">Snippet by <a href="https://bootstrapious.com/snippets" class="text-white">
-            <u>Bootstrapious</u></a>
-    </p> -->
     <div class="separator"></div>
     <div class="row text-white">
         <div class="col">
@@ -241,35 +230,9 @@
                         opt.innerHTML = keystr;
                         versionOption.appendChild(opt);
                     })
-                }).finally(() => {
-                    $("#versionTab").val($("#versionTab option:first").val());
-                    db.ref().child($('#projectTab').find(":selected").val()).child("userdata").get().then((snapshot) => {
-                        if (snapshot.exists()) {
-                            $('#dataUser').text(JSON.stringify(snapshot.val()));
-                            console.log(snapshot.val());
-                        } else {
-                            console.log("Current have 0 record.");
-                        }
-                    }).catch((error) => {
-                        console.error(error);
-                    });
-                });
+                })
 
             });
-
-            // $('#versionTab').find('option').remove().end();
-            // let db = firebase.database(firebase.app(defaultProject));
-            // let versionOption = document.getElementById('versionTab');
-            // db.ref().once('value').then((snapshot) => {
-            //     snapshot.forEach((childSnapshot) => {
-            //         var keystr = childSnapshot.key;
-            //         //var value = childSnapshot.val();
-            //         var opt = document.createElement('option');
-            //         opt.value = keystr;
-            //         opt.innerHTML = keystr;
-            //         versionOption.appendChild(opt);
-            //     })
-            // });
         });
     }
 
