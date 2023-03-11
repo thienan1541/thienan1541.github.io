@@ -190,7 +190,7 @@
             // });
         });
 
-
+        console.log(2);
         $('#versionTab').find('option').remove().end();
         let db = firebase.database(firebase.app(defaultProject));
         let versionOption = document.getElementById('versionTab');
@@ -254,7 +254,7 @@
         });
     });
     function logOut() {
-        document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+        document.cookie.split(";").forEach(function (c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
         window.location.assign('/login');
     }
 </script>
