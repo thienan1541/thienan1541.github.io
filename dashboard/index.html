@@ -175,7 +175,9 @@
         $("#projectTab").val($("#projectTab option:first").val());
 
         $('#versionTab').find('option').remove().end();
-        let db = firebase.database(firebase.app($('#projectTab').find(":selected").val()));
+        var selectedProject = $('#projectTab').find(":selected").val();
+        console.log(selectedProject);
+        let db = firebase.database(firebase.app(selectedProject));
         db.ref().once('value').then((snapshot) => {
             snapshot.forEach((childSnapshot) => {
                 var keystr = childSnapshot.key;
