@@ -11,6 +11,7 @@
 <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../js/firebaseDefaultConfig.js"></script>
+<script src="../js/nav.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="vertical-nav bg-white" id="sidebar">
     <div class="py-4 px-3 mb-4 bg-light">
@@ -287,15 +288,6 @@
             versionOption.appendChild(opt);
         })
         return 1;
-    }
-
-
-
-
-
-    function logOut() {
-        document.cookie.split(";").forEach(function (c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
-        window.location.assign('/login');
     }
 </script>
 
