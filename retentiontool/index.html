@@ -19,7 +19,9 @@
 
 </div>
 <div class="page-content p-5" id="content">
-  <!-- <h1>Retention Tool <a href="">2_3</a></h1> -->
+  <!-- Toggle button -->
+  <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i
+      class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Toggle</small></button>
   <div class="row">
     <div class="col-md-6">
       <span class="text-white" style="font-size: medium;">Số tiền quảng cáo hằng ngày: <input id="inputMoney"
@@ -37,7 +39,7 @@
     </div>
   </div>
 
-
+  <span class="text-white" style="font-size: medium;">Nhập retention hằng ngày: </span>
   <div class="row">
     <div class="col-md-3">
       <input id="inputRetention0" value="1" />
@@ -54,7 +56,7 @@
   </div>
 
 
-  <span class="text-white" style="font-size: medium;">Nhập retention hằng ngày = </span>
+
   <div class="row">
     <div class="col-md-3">
       <input id="inputRetention4" value="0.092" />
@@ -76,7 +78,7 @@
   </div>
 
   <br>
-  <div>
+  <div class="bg-white p-5 rounded shadow-sm">
     <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
     <canvas id="finalChart" style="width:100%;max-width:700px;"></canvas>
   </div>
@@ -84,31 +86,13 @@
 
 
 
-  <h3>
+  <div class="bg-white p-5 rounded shadow-sm">
     <div id="ketqua" style="font-family: Arial; line-height: 1.5em; "></div>
-  </h3>
+  </div>
 </div>
 
 <script>
   const versionName = "2_3";
-
-  function getData(version) {
-    var database = firebase.database();
-    const dbRef = firebase.database().ref();
-    dbRef.child(version + "").child("userdata").get().then((snapshot) => {
-      if (snapshot.exists()) {
-        console.log(snapshot.val());
-        allData = snapshot.val();
-        console.log(allData);
-        drawChart();
-      } else {
-        console.log("No data available");
-      }
-    }).catch((error) => {
-      console.error(error);
-    });
-  }
-
   function calculate() {
     let day = Number(document.getElementById("inputDay").value);
 
