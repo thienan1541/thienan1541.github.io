@@ -21,3 +21,7 @@ function logOut() {
 function retentionTool() {
     window.location.assign('/retentiontool');
 }
+
+function home() {
+    window.location.assign('/dashboard');
+}
