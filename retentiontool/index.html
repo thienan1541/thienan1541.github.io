@@ -20,14 +20,10 @@
 </div>
 <div class="page-content p-5" id="content">
   <!-- <h1>Retention Tool <a href="">2_3</a></h1> -->
-  <h1>Retention Tool</h1>
-  <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
-  <canvas id="finalChart" style="width:100%;max-width:700px;"></canvas>
-
-  <h1>Nhập số tiền quảng cáo hằng ngày = <span id="avgPlayTime"></span><input id="inputMoney" value="2" /></h1>
-  <h1>Nhập tỉ lệ lời mong muốn = <span id="avgPlayTime"></span><input id="inputRatio" value="1.2" /></h1>
-  <h1>Nhập số ngày = <span id="avgPlayTime"></span><input id="inputDay" value="20" /></h1>
-  <h1>Nhập retention hằng ngày = <span id="avgPlayTime"></span></h1>
+  <span class="text-white" style="font-size: medium;">Nhập số tiền quảng cáo hằng ngày = <input id="inputMoney" value="2" /></span>
+  <span class="text-white" style="font-size: medium;">Nhập tỉ lệ lời mong muốn = <input id="inputRatio" value="1.2" /></span>
+  <span class="text-white" style="font-size: medium;">Nhập số ngày = <input id="inputDay" value="20" /></span>
+  <span class="text-white" style="font-size: medium;">Nhập retention hằng ngày = </span>
   <input id="inputRetention0" value="1" />
   <input id="inputRetention1" value="0.169" />
   <input id="inputRetention2" value="0.1" />
@@ -37,6 +33,8 @@
   <input id="inputRetention6" value="0.062" />
   <input id="inputRetention7" value="0.044" />
   <br>
+  <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+  <canvas id="finalChart" style="width:100%;max-width:700px;"></canvas>
 
   <button id="calculate" onclick=calculate()>Tính toán</button>
 
