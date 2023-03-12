@@ -48,10 +48,23 @@
             </div>
         </div>
     </div>
+    <div class="separator"></div>
+    <div class="row text-white">
+        <div class="col">
+            <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        </div>
+    </div>
+    <div class="row text-white">
+        <div class="col">
+            <span class="text-white" style="font-size: medium;">Retention D1: </span><span id="retentionDay1"></span>
+            <span class="text-white" style="font-size: medium;">Thời gian chơi trung bình:</span><span id="avgPlayTime"></span>
+            <span class="text-white" style="font-size: medium;">Số lần chơi trung bình: </span><span id="avgSession"></span>
+    </div>
 
 </div>
 <script>
     var projectConfig = {};
+    var allData = [];
     $(function () {
         // Check if the cookie exists or cookie already expried
         if (document.cookie.indexOf("username") === -1) {
@@ -76,7 +89,7 @@
 
 
         $('#projectTab').on('change', function () {
-            $('#dataUser').text(''); 
+            $('#dataUser').text('');
             if (this.value === '') return;
             // get data 1
             const db = firebase.app(this.value).database();
@@ -101,6 +114,7 @@
         });
 
         $('#versionTab').on('change', function () {
+            allData = [];
             if (this.value === '') {
                 $('#dataUser').text('');
                 return;
@@ -115,6 +129,8 @@
                 if (snapshot.exists()) {
                     $('#dataUser').text(JSON.stringify(snapshot.val()));
                     console.log(snapshot.val());
+                    allData = snapshot.val();
+                    drawChart();
                 } else {
                     console.log("Current have 0 record.");
                 }
@@ -149,7 +165,7 @@
             select.appendChild(opt);
             defaultProject = keystr;
         });
-        
+
         return firstKey;
         // databaseConfig.get().then((snapshot) => {
         //     snapshot.forEach((childSnapshot) => {
@@ -208,6 +224,82 @@
             versionOption.appendChild(opt);
         })
         return 1;
+    }
+
+
+    function drawChart() {
+        // var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+        // var yValues = [55, 49, 44, 24, 15];
+        // var barColors = ["red", "green", "blue", "orange", "brown"];
+
+        var xValues = [];
+        var yValues = [];
+        var retentionValues = [];
+        var barColors = "blue";
+
+        for (let i = 0; i <= 7; i++) {
+            xValues.push("retention " + i);
+            retentionValues.push(0);
+        }
+
+        let retentionDay0 = 0;
+        let retentionDay1 = 0;
+        let totalPlayTime = 0;
+        let totalSessionCount = 0;
+        let userCount = 0;
+
+        for (const property in allData) {
+            var user = allData[property];
+            let isRealUser = user['installerName'] == 'com.android.vending';
+            if (isRealUser == false) continue;
+            userCount++;
+            let retention_type = user['retentionType'];
+            let today = 738550.4475819197
+            let timeSinceFirstPlay = Math.round(today - user["startPlayDay"]);
+
+            let bool0 = timeSinceFirstPlay > 0 && retention_type >= 0;
+            let bool1 = timeSinceFirstPlay > 1 && retention_type >= 1;
+
+            if (bool0) retentionDay0 += 1;
+            if (bool1) retentionDay1 += 1;
+
+            let info = property + " timeSinceFirstPlay = " + timeSinceFirstPlay + ", retention 0 = " + bool0;
+            if (bool1) info += ", retention 1 = " + bool1;
+            console.log(info);
+
+            let playTime = user["totalPlayTime"];
+            totalPlayTime += playTime;
+
+            let sessionCount = user["sessionCount"];
+            totalSessionCount += sessionCount;
+            // retentionDay0 += 1;
+            // retentionDay1 += 1;
+        }
+
+        retentionValues[0] = retentionDay0;
+        retentionValues[1] = retentionDay1;
+        console.log(retentionValues);
+
+        const div1 = document.getElementById("retentionDay1");
+        div1.innerText = (retentionDay1 / retentionDay0 * 100).toFixed(2) + "%";
+
+        const div2 = document.getElementById("avgPlayTime");
+        div2.innerText = (totalPlayTime / userCount / 60).toFixed(2) + " phút";
+
+        const div3 = document.getElementById("avgSession");
+        div3.innerText = (totalSessionCount / userCount).toFixed(2) + " lần";
+
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: retentionValues
+                }]
+            },
+            options: {}
+        });
     }
 </script>
 
