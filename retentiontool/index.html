@@ -82,7 +82,7 @@
     <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
     <canvas id="finalChart" style="width:100%;max-width:700px;"></canvas>
   </div>
-
+  <div class="separator"></div>
   <div class="bg-white p-5 rounded shadow-sm">
     <div id="ketqua" style="font-family: Arial; line-height: 1.5em; "></div>
   </div>
@@ -110,6 +110,7 @@
       data: {
         labels: xValues,
         datasets: [{
+          label: 'Retention',
           backgroundColor: barColors,
           data: yValues
         }]
