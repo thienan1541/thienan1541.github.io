@@ -20,23 +20,69 @@
 </div>
 <div class="page-content p-5" id="content">
   <!-- <h1>Retention Tool <a href="">2_3</a></h1> -->
-  <span class="text-white" style="font-size: medium;">Nhập số tiền quảng cáo hằng ngày = <input id="inputMoney" value="2" /></span>
-  <span class="text-white" style="font-size: medium;">Nhập tỉ lệ lời mong muốn = <input id="inputRatio" value="1.2" /></span>
-  <span class="text-white" style="font-size: medium;">Nhập số ngày = <input id="inputDay" value="20" /></span>
-  <span class="text-white" style="font-size: medium;">Nhập retention hằng ngày = </span>
-  <input id="inputRetention0" value="1" />
-  <input id="inputRetention1" value="0.169" />
-  <input id="inputRetention2" value="0.1" />
-  <input id="inputRetention3" value="0.098" />
-  <input id="inputRetention4" value="0.092" />
-  <input id="inputRetention5" value="0.063" />
-  <input id="inputRetention6" value="0.062" />
-  <input id="inputRetention7" value="0.044" />
-  <br>
-  <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
-  <canvas id="finalChart" style="width:100%;max-width:700px;"></canvas>
+  <div class="row">
+    <div class="col-md-6">
+      <span class="text-white" style="font-size: medium;">Số tiền quảng cáo hằng ngày: <input id="inputMoney"
+          value="2" /></span>
+    </div>
+    <div class="col-md-6">
+      <span class="text-white" style="font-size: medium;">Tỉ lệ lời mong muốn: <input id="inputRatio"
+          value="1.2" /></span>
+    </div>
+  </div>
 
-  <button id="calculate" onclick=calculate()>Tính toán</button>
+  <div class="row">
+    <div class="col-md-6">
+      <span class="text-white" style="font-size: medium;">Nhập số ngày = <input id="inputDay" value="20" /></span>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-3">
+      <input id="inputRetention0" value="1" />
+    </div>
+    <div class="col-md-3">
+      <input id="inputRetention1" value="0.169" />
+    </div>
+    <div class="col-md-3">
+      <input id="inputRetention2" value="0.1" />
+    </div>
+    <div class="col-md-3">
+      <input id="inputRetention3" value="0.098" />
+    </div>
+  </div>
+
+
+  <span class="text-white" style="font-size: medium;">Nhập retention hằng ngày = </span>
+  <div class="row">
+    <div class="col-md-3">
+      <input id="inputRetention4" value="0.092" />
+    </div>
+    <div class="col-md-3">
+      <input id="inputRetention5" value="0.063" />
+    </div>
+    <div class="col-md-3">
+      <input id="inputRetention6" value="0.062" />
+    </div>
+    <div class="col-md-3">
+      <input id="inputRetention7" value="0.044" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <button id="calculate" onclick=calculate()>Tính toán</button>
+    </div>
+  </div>
+
+  <br>
+  <div>
+    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+    <canvas id="finalChart" style="width:100%;max-width:700px;"></canvas>
+  </div>
+
+
+
 
   <h3>
     <div id="ketqua" style="font-family: Arial; line-height: 1.5em; "></div>
