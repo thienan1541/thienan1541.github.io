@@ -1,5 +1,5 @@
 $(function () {
-    $('#lblUsername').text(document.cookie.split('; ')[0].split('=')[1]);
+   
     // Get reference to the div element
     const myDiv = document.getElementById('navBar');
 
@@ -9,6 +9,7 @@ $(function () {
         .then(html => {
             // Set the content of the div element
             myDiv.innerHTML = html;
+            $('#lblUsername').text(document.cookie.split('; ')[0].split('=')[1]);
         })
         .catch(error => {
             console.error(error);
