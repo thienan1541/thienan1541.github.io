@@ -26,5 +26,8 @@ function home() {
     window.location.assign('/dashboard');
 }
 function changePass() {
-    window.location.assign('/changpass');
+    window.location.assign('/changepass');
+}
+function userinfo() {
+    window.location.assign('/userinfo');
 }
