@@ -35,63 +35,65 @@
         <div class="mb-3 row">
             <label for="oldPass" class="col-sm-2 col-form-label text-white">Nhập mật khẩu hiện tại: </label>
             <div class="col-sm-4">
-                <input type="password" class="form-control" id="oldPass">
+                <input type="password" class="form-control" id="oldPass" required>
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="newPass" class="col-sm-2 col-form-label">Nhập mật khẩu mới: </label>
+            <label for="newPass" class="col-sm-2 col-form-label text-white">Nhập mật khẩu mới: </label>
             <div class="col-sm-4">
-                <input type="password" class="form-control" id="newPass">
+                <input type="password" class="form-control" id="newPass" required>
             </div>
         </div>
 
         <div class="mb-3 row">
-            <label for="confirmPass" class="col-sm-2 col-form-label">Nhập lại mật khẩu mới: </label>
+            <label for="confirmPass" class="col-sm-2 col-form-label text-white">Nhập lại mật khẩu mới: </label>
             <div class="col-sm-4">
-                <input type="password" class="form-control" id="confirmPass">
+                <input type="password" class="form-control" id="confirmPass" required>
             </div>
         </div>
         <div class="row">
             <div class="col-md-2">
-                <button id="changePass" class="btn btn-primary" onclick=changePass()>Đổi mật khẩu</button>
+                <button id="changePass" class="btn btn-primary">Đổi mật khẩu</button>
             </div>
         </div>
     </div>
 
 </body>
 <script>
-    function changePass() {
-        let oldPass = $('#oldPass');
-        let newPass = $('#newPass');
-        let confirmPass = $('#confirmPass');
+    $(function () {
+        $("#changePass").click(function () {
+            let oldPass = $('#oldPass');
+            let newPass = $('#newPass');
+            let confirmPass = $('#confirmPass');
 
-        if (newPass.val() !== confirmPass.val()) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Mật khẩu mới không trùng nhau',
-            });
-        } else {
-            let userRef = defaultDb.ref('users/' + document.cookie.split('; ')[0].split('=')[1]);
-            userRef.get().then((snapshot) => {
-                if (oldPass.val() !== snapshot.val()['pwd']) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Mật khẩu hiện tại bạn nhập không đúng',
-                    });
-                } else {
-                    userRef.update({
-                        pwd: newPass.val()
-                    }).then(() => {
-                        console.log('Password updated successfully.');
-                    }).catch((error) => {
-                        console.error('Error updating password:', error);
-                    });
-                }
-            });
-        }
-    }
+            if (newPass.val() !== confirmPass.val()) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Mật khẩu mới không trùng nhau',
+                });
+            } else {
+                let userRef = defaultDb.ref('users/' + document.cookie.split('; ')[0].split('=')[1]);
+                userRef.get().then((snapshot) => {
+                    if (oldPass.val() !== snapshot.val()['pwd']) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Mật khẩu hiện tại bạn nhập không đúng',
+                        });
+                    } else {
+                        userRef.update({
+                            pwd: newPass.val()
+                        }).then(() => {
+                            console.log('Password updated successfully.');
+                        }).catch((error) => {
+                            console.error('Error updating password:', error);
+                        });
+                    }
+                });
+            }
+        });
+    });
 </script>
 
 </html>
