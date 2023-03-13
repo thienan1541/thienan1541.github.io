@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="nav.css">
-<link rel="stylesheet" href="../css/chip.css?2">
+<link rel="stylesheet" href="../css/chip.css?3">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <!-- jQuery -->
@@ -108,7 +108,7 @@
         });
         console.log(3);
 
-        $('input[type=radio][name=project]').change(function () {
+        $('input[type=radio][name=project]').on('click', function () {
             alert(this.value);
         });
 
