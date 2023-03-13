@@ -31,22 +31,7 @@
         <legend>
             Radio Chips
         </legend>
-        <div class="chip-group" tabindex="-1" role="radiogroup">
-            <div class="chip chip-checkbox" aria-labelledby="radioOneLabel" tabindex="0" role="radio"
-                aria-checked="false">
-                <input type="radio" name="radioEx" />
-                <span id="radioOneLabel">One</span>
-            </div>
-            <div class="chip chip-checkbox" aria-labelledby="radioTwoLabel" tabindex="0" role="radio"
-                aria-checked="false">
-                <input type="radio" name="radioEx" />
-                <span id="radioTwoLabel">Two</span>
-            </div>
-            <div class="chip chip-checkbox" aria-labelledby="radioThreeLabel" tabindex="0" role="radio"
-                aria-checked="false">
-                <input type="radio" name="radioEx" />
-                <span id="radioThreeLabel">Three</span>
-            </div>
+        <div class="chip-group" tabindex="-1" role="radiogroup" id="projectChip">
         </div>
     </fieldset>
 
@@ -212,6 +197,15 @@
             opt.innerHTML = keystr;
             select.appendChild(opt);
             defaultProject = keystr;
+
+            let htmlPattern =  `<div class="chip chip-checkbox" aria-labelledby="${keystr}" tabindex="0" role="radio"
+                aria-checked="false">
+                <input type="radio" name="project" />
+                <span id="${keystr}">${keystr}</span>
+            </div>`;
+            $('#projectChip').append(htmlPattern);
+
+
         });
 
         return firstKey;
