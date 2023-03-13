@@ -46,7 +46,8 @@
         $(function () {
             let userRef = defaultDb.ref('users/' + document.cookie.split('; ')[0].split('=')[1]);
             userRef.get().then((snapshot) => {
-                console.log(snapshot.val());
+                //console.log(snapshot.val());
+                $('#dataUser').text(JSON.stringify(snapshot.val()));
             });
         });
 </script>
