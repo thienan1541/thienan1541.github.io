@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,8 +29,26 @@
         <!-- Toggle button -->
         <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i
                 class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Toggle</small></button>
+        <h2 class="display-4 text-white">Thông tin cá nhân</h2>
+        <div class="separator"></div>
+        <div class="row text-white">
+            <div class="col">
+                <div class="bg-white p-5 rounded shadow-sm">
+                    <p style="color: black; word-break: break-word;" id="dataUser"></p>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>
+
+<script>
+        $(function () {
+            let userRef = defaultDb.ref('users/' + document.cookie.split('; ')[0].split('=')[1]);
+            userRef.get().then((snapshot) => {
+                console.log(snapshot.val());
+            });
+        });
+</script>
 
 </html>

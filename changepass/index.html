@@ -61,7 +61,36 @@
 </body>
 <script>
     function changePass() {
-        return;
+        let oldPass = $('#oldPass');
+        let newPass = $('#newPass');
+        let confirmPass = $('#confirmPass');
+
+        if (newPass.val() !== confirmPass.val()) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Mật khẩu mới không trùng nhau',
+            });
+        } else {
+            let userRef = defaultDb.ref('users/' + document.cookie.split('; ')[0].split('=')[1]);
+            userRef.get().then((snapshot) => {
+                if (oldPass.val() !== snapshot.val()['pwd']) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Mật khẩu hiện tại bạn nhập không đúng',
+                    });
+                } else {
+                    userRef.update({
+                        pwd: newPass.val()
+                    }).then(() => {
+                        console.log('Password updated successfully.');
+                    }).catch((error) => {
+                        console.error('Error updating password:', error);
+                    });
+                }
+            });
+        }
     }
 </script>
 

@@ -86,7 +86,6 @@
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar, #content').toggleClass('active');
         });
-        $('#lblUsername').text(document.cookie.split('; ')[0].split('=')[1]);
         getData().then((data) => {
             console.log(data);
         }).catch((error) => {

@@ -1,4 +1,5 @@
 $(function () {
+    $('#lblUsername').text(document.cookie.split('; ')[0].split('=')[1]);
     // Get reference to the div element
     const myDiv = document.getElementById('navBar');
 
