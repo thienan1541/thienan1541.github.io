@@ -114,8 +114,8 @@
                 const versions = Object.keys(snapshot.val());
                 versions.forEach(function (item, index) {
                     var opt = document.createElement('option');
-                    opt.value = keystr;
-                    opt.innerHTML = keystr;
+                    opt.value = item;
+                    opt.innerHTML = item;
                     versionOption.appendChild(opt);
                 });
             });
