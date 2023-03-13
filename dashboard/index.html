@@ -108,7 +108,9 @@
         });
         console.log(3);
 
-
+        $('input[type=radio][name=project]').change(function () {
+            alert(this.value);
+        });
 
 
         $('#projectTab').on('change', function () {
@@ -198,7 +200,7 @@
             select.appendChild(opt);
             defaultProject = keystr;
 
-            let htmlPattern =  `<div class="chip chip-checkbox" aria-labelledby="${keystr}" tabindex="0" role="radio"
+            let htmlPattern = `<div class="chip chip-checkbox" aria-labelledby="${keystr}" tabindex="0" role="radio"
                 aria-checked="false">
                 <input type="radio" name="project" />
                 <span id="${keystr}">${keystr}</span>
