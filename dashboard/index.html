@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="nav.css">
+<link rel="stylesheet" href="../css/chip.css">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <!-- jQuery -->
@@ -12,6 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../js/firebaseDefaultConfig.js" defer></script>
 <script src="../js/nav.js" defer></script>
+<script src="../js/chip.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <div id="navBar"></div>
@@ -22,6 +24,34 @@
             class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Toggle</small></button>
 
     <h2 class="display-4 text-white">All project</h2>
+
+
+
+    <fieldset>
+        <legend>
+            Radio Chips
+        </legend>
+        <div class="chip-group" tabindex="-1" role="radiogroup">
+            <div class="chip chip-checkbox" aria-labelledby="radioOneLabel" tabindex="0" role="radio"
+                aria-checked="false">
+                <input type="radio" name="radioEx" />
+                <span id="radioOneLabel">One</span>
+            </div>
+            <div class="chip chip-checkbox" aria-labelledby="radioTwoLabel" tabindex="0" role="radio"
+                aria-checked="false">
+                <input type="radio" name="radioEx" />
+                <span id="radioTwoLabel">Two</span>
+            </div>
+            <div class="chip chip-checkbox" aria-labelledby="radioThreeLabel" tabindex="0" role="radio"
+                aria-checked="false">
+                <input type="radio" name="radioEx" />
+                <span id="radioThreeLabel">Three</span>
+            </div>
+        </div>
+    </fieldset>
+
+
+
     <div class="row">
         <div class="col-md-1">
             <span class="text-white" style="font-size: large;">Project</span>
