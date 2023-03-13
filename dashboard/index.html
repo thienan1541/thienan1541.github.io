@@ -114,8 +114,9 @@
             versionOption.appendChild(opt);
             let ref = db.ref().orderByKey();
             ref.once('value', (snapshot) => {
-                const users = Object.keys(snapshot.val());
-                console.log(users);
+                const versions = Object.keys(snapshot.val());
+                //console.log(users);
+                versions.forEach(version => console.log(version));
             });
             // db.ref().get().then((snapshot) => {
             //     snapshot.forEach((childSnapshot) => {
