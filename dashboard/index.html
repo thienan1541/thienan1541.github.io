@@ -89,9 +89,6 @@
         $('#lblUsername').text(document.cookie.split('; ')[0].split('=')[1]);
         getData().then((data) => {
             console.log(data);
-            // getVersion(data).then((data) => {
-            //     console.log(data);
-            // });
         }).catch((error) => {
             console.error(error);
         });
@@ -115,8 +112,12 @@
             let ref = db.ref().orderByKey();
             ref.once('value', (snapshot) => {
                 const versions = Object.keys(snapshot.val());
-                //console.log(users);
-                versions.forEach(version => console.log(version));
+                versions.forEach(function (item, index) {
+                    var opt = document.createElement('option');
+                    opt.value = keystr;
+                    opt.innerHTML = keystr;
+                    versionOption.appendChild(opt);
+                });
             });
             // db.ref().get().then((snapshot) => {
             //     snapshot.forEach((childSnapshot) => {
@@ -185,64 +186,8 @@
         });
 
         return firstKey;
-        // databaseConfig.get().then((snapshot) => {
-        //     snapshot.forEach((childSnapshot) => {
-        //         var keystr = childSnapshot.key;
-        //         var value = childSnapshot.val();
-        //         projectConfig[keystr] = value;
-        //         firebase.initializeApp(value, keystr);
-        //         console.log('initializeApp: ' + keystr);
-        //         var opt = document.createElement('option');
-        //         opt.value = keystr;
-        //         opt.innerHTML = keystr;
-        //         select.appendChild(opt);
-        //         defaultProject = keystr;
-        //     });
-        // }).finally(() => {
-        //     console.log('Experiment completed');
-        //     $("#projectTab").val($("#projectTab option:first").val());
-        //     // $('#versionTab').find('option').remove().end();
-        //     // let db = firebase.database(firebase.app($('#projectTab').find(":selected").val()));
-        //     // let versionOption = document.getElementById('versionTab');
-        //     // let opt = document.createElement('option');
-        //     // opt.value = '';
-        //     // opt.innerHTML = '';
-        //     // versionOption.appendChild(opt);
-        //     // db.ref().get().then((snapshot) => {
-        //     //     snapshot.forEach((childSnapshot) => {
-        //     //         var keystr = childSnapshot.key;
-        //     //         //var value = childSnapshot.val();
-        //     //         var opt = document.createElement('option');
-        //     //         opt.value = keystr;
-        //     //         opt.innerHTML = keystr;
-        //     //         versionOption.appendChild(opt);
-        //     //     })
-        //     // })
-
-        // });
-        // return $("#projectTab option:first").val();
     }
 
-    async function getVersion(project) {
-        $('#versionTab').find('option').remove().end();
-        let db = firebase.database(firebase.app(project));
-        let versionOption = document.getElementById('versionTab');
-        let opt = document.createElement('option');
-        opt.value = '';
-        opt.innerHTML = '';
-        versionOption.appendChild(opt);
-        const snapshot = await db.ref().get();
-
-        snapshot.forEach((childSnapshot) => {
-            var keystr = childSnapshot.key;
-            //var value = childSnapshot.val();
-            var opt = document.createElement('option');
-            opt.value = keystr;
-            opt.innerHTML = keystr;
-            versionOption.appendChild(opt);
-        })
-        return 1;
-    }
 
 
     function drawChart() {
