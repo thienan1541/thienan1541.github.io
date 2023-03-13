@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,8 +29,41 @@
         <!-- Toggle button -->
         <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i
                 class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Toggle</small></button>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <span class="text-white" style="font-size: medium;">Nhập mật khẩu cũ: <input id="oldPass"
+                        value="2" /></span>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span class="text-white" style="font-size: medium;">Nhập mật khẩu mới: <input id="newPass"
+                        value="1.2" /></span>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span class="text-white" style="font-size: medium;">Nhập lại mật khẩu mới: <input id="confirmPass"
+                        value="1.2" /></span>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <button id="changePass" class="btn btn-primary" onclick=changePass()>Tính toán</button>
+            </div>
+        </div>
     </div>
 
 </body>
+<script>
+    function changePass() {
+        return;
+    }
+</script>
 
 </html>
