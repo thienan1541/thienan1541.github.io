@@ -25,3 +25,6 @@ function retentionTool() {
 function home() {
     window.location.assign('/dashboard');
 }
+function changePass() {
+    window.location.assign('/changpass');
+}
