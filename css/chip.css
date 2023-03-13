@@ -18,7 +18,7 @@ button {
 .chip>* {
     margin-right: 2px;
     margin-left: 2px;
-    color: white;
+    color: black;
 }
 
 .chip input {
@@ -32,18 +32,18 @@ button {
 }
 
 .chip.active {
-    background-color: blue;
-    border-color: blue;
+    background-color: #FFE7CC;
+    border-color: #FFE7CC;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12)
 }
 
 .chip:hover,
 .chip:focus {
-    background-color: blue;
+    background-color: #FFE7CC;
 }
 
 .chip:active:focus {
-    background-color: blue;
+    background-color: #FFE7CC;
 }
 
 .chip button {
