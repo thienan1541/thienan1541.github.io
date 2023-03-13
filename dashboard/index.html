@@ -64,7 +64,7 @@
     </div>
 
     <div class="separator"></div>
-    
+
     <div class="row text-white">
         <div class="col">
             <div class="bg-white p-5 rounded shadow-sm">
@@ -112,16 +112,21 @@
             opt.value = '';
             opt.innerHTML = '';
             versionOption.appendChild(opt);
-            db.ref().get().then((snapshot) => {
-                snapshot.forEach((childSnapshot) => {
-                    var keystr = childSnapshot.key;
-                    //var value = childSnapshot.val();
-                    var opt = document.createElement('option');
-                    opt.value = keystr;
-                    opt.innerHTML = keystr;
-                    versionOption.appendChild(opt);
-                })
-            })
+            let ref = db.ref().orderByKey();
+            ref.once('value', (snapshot) => {
+                const users = Object.keys(snapshot.val());
+                console.log(users);
+            });
+            // db.ref().get().then((snapshot) => {
+            //     snapshot.forEach((childSnapshot) => {
+            //         var keystr = childSnapshot.key;
+            //         //var value = childSnapshot.val();
+            //         var opt = document.createElement('option');
+            //         opt.value = keystr;
+            //         opt.innerHTML = keystr;
+            //         versionOption.appendChild(opt);
+            //     })
+            // })
 
         });
 
