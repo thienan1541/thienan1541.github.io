@@ -29,9 +29,16 @@
 
     <fieldset>
         <legend>
-            Radio Chips
+            Project
         </legend>
         <div class="chip-group" tabindex="-1" role="radiogroup" id="projectChip">
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>
+            Version
+        </legend>
+        <div class="chip-group" tabindex="-1" role="radiogroup" id="versionChip">
         </div>
     </fieldset>
 
@@ -209,24 +216,25 @@
     function updateVersion(project) {
         //alert(project);
         $('#dataUser').text('');
+        $('#versionChip').children().remove()
         const db = firebase.app(project).database();
         db.goOnline();
-        let versionOption = document.getElementById('versionTab');
-        $('#versionTab').find('option').remove().end();
-        let opt = document.createElement('option');
-        opt.value = '';
-        opt.innerHTML = '';
-        versionOption.appendChild(opt);
         let ref = db.ref().orderByKey();
         ref.once('value', (snapshot) => {
             const versions = Object.keys(snapshot.val());
             versions.forEach(function (item, index) {
-                var opt = document.createElement('option');
-                opt.value = item;
-                opt.innerHTML = item;
-                versionOption.appendChild(opt);
+                let htmlPattern = `<div class="chip chip-checkbox" aria-labelledby="${keystr}" tabindex="0" role="radio"
+                aria-checked="false" onclick="getDataByVersion('${keystr}')">
+                <input type="radio" id="${keystr}" name="version" value="${keystr}"/>
+                <span>${keystr}</span>
+            </div>`;
+                $('#versionChip').append(htmlPattern);
             });
         });
+    }
+
+    function getDataByVersion(version) {
+        alert(version);
     }
 
 
