@@ -106,12 +106,6 @@
         }).catch((error) => {
             console.error(error);
         });
-        console.log(3);
-
-        $('input:radio[name=project]').change(function () {
-            alert(this.value);
-        });
-
 
         $('#projectTab').on('change', function () {
             $('#dataUser').text('');
@@ -208,6 +202,9 @@
             $('#projectChip').append(htmlPattern);
 
 
+        });
+        $('input:radio[name=project]').change(function () {
+            alert(this.value);
         });
 
         return firstKey;
