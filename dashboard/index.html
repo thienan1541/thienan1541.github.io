@@ -113,41 +113,6 @@
         }).catch((error) => {
             console.error(error);
         });
-
-        $('#projectTab').on('change', function () {
-            $('#dataUser').text('');
-            if (this.value === '') return;
-            // get data 1
-            const db = firebase.app(this.value).database();
-            db.goOnline();
-            let versionOption = document.getElementById('versionTab');
-            $('#versionTab').find('option').remove().end();
-            let opt = document.createElement('option');
-            opt.value = '';
-            opt.innerHTML = '';
-            versionOption.appendChild(opt);
-            let ref = db.ref().orderByKey();
-            ref.once('value', (snapshot) => {
-                const versions = Object.keys(snapshot.val());
-                versions.forEach(function (item, index) {
-                    var opt = document.createElement('option');
-                    opt.value = item;
-                    opt.innerHTML = item;
-                    versionOption.appendChild(opt);
-                });
-            });
-            // db.ref().get().then((snapshot) => {
-            //     snapshot.forEach((childSnapshot) => {
-            //         var keystr = childSnapshot.key;
-            //         //var value = childSnapshot.val();
-            //         var opt = document.createElement('option');
-            //         opt.value = keystr;
-            //         opt.innerHTML = keystr;
-            //         versionOption.appendChild(opt);
-            //     })
-            // })
-
-        });
     });
 
     async function getData() {
@@ -155,11 +120,6 @@
         defaultDb.goOnline();
         const snapshot = await databaseConfig.get();
         let firstKey;
-        let select = document.getElementById('projectTab');
-        let opt = document.createElement('option');
-        opt.value = '';
-        opt.innerHTML = '';
-        select.appendChild(opt);
         snapshot.forEach((childSnapshot) => {
             if (!firstKey) {
                 firstKey = childSnapshot.key;
@@ -168,11 +128,6 @@
             var value = childSnapshot.val();
             projectConfig[keystr] = value;
             firebase.initializeApp(value, keystr);
-            console.log('initializeApp: ' + keystr);
-            var opt = document.createElement('option');
-            opt.value = keystr;
-            opt.innerHTML = keystr;
-            select.appendChild(opt);
             defaultProject = keystr;
 
             let htmlPattern = `<div class="chip chip-checkbox" aria-labelledby="${keystr}" tabindex="0" role="radio"
