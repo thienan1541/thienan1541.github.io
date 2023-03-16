@@ -223,10 +223,10 @@
         ref.once('value', (snapshot) => {
             const versions = Object.keys(snapshot.val());
             versions.forEach(function (item, index) {
-                let htmlPattern = `<div class="chip chip-checkbox" aria-labelledby="${keystr}" tabindex="0" role="radio"
-                aria-checked="false" onclick="getDataByVersion('${keystr}')">
-                <input type="radio" id="${keystr}" name="version" value="${keystr}"/>
-                <span>${keystr}</span>
+                let htmlPattern = `<div class="chip chip-checkbox" aria-labelledby="${item}" tabindex="0" role="radio"
+                aria-checked="false" onclick="getDataByVersion('${item}')">
+                <input type="radio" id="${item}" name="version" value="${item}"/>
+                <span>${item}</span>
             </div>`;
                 $('#versionChip').append(htmlPattern);
             });
