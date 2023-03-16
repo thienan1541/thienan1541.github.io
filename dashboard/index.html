@@ -202,7 +202,7 @@
 
             let htmlPattern = `<div class="chip chip-checkbox" aria-labelledby="${keystr}" tabindex="0" role="radio"
                 aria-checked="false">
-                <input type="radio" name="project" />
+                <input type="radio" name="project" value="${keystr}"/>
                 <span id="${keystr}">${keystr}</span>
             </div>`;
             $('#projectChip').append(htmlPattern);
