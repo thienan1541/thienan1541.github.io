@@ -105,8 +105,13 @@ body {
   animation: spin 1s linear infinite;
 }
 .style-2 .loading-wheel {
-  border-style: double;
-  border-color: #ccc transparent;
+  display: inline-block;
+  border-width: 2px;
+  border-color: rgba(255, 255, 255, 0.05);
+  border-top-color: #fff;
+  animation: spin 1s infinite linear;
+  border-radius: 100%;
+  border-style: solid;
 }
 @keyframes spin {
   0% {
