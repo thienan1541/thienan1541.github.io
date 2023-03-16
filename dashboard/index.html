@@ -196,18 +196,18 @@
 
             let htmlPattern = `<div class="chip chip-checkbox" aria-labelledby="${keystr}" tabindex="0" role="radio"
                 aria-checked="false">
-                <input type="radio" id="${keystr}" name="project" value="${keystr}"/>
+                <input type="radio" id="${keystr}" name="project" value="${keystr}" onclick="updateVersion('${keystr}')"/>
                 <span>${keystr}</span>
             </div>`;
             $('#projectChip').append(htmlPattern);
 
 
         });
-        $('input:radio[name=project]').change(function () {
-            alert(this.value);
-        });
-
         return firstKey;
+    }
+
+    function updateVersion(project) {
+        alert(project);
     }
 
 
