@@ -29,14 +29,14 @@
 
     <fieldset>
         <legend>
-            Project
+            <span class="text-white" style="font-size: large;">Project</span>
         </legend>
         <div class="chip-group" tabindex="-1" role="radiogroup" id="projectChip">
         </div>
     </fieldset>
     <fieldset>
         <legend>
-            Version
+            <span class="text-white" style="font-size: large;">Version</span>
         </legend>
         <div class="chip-group" tabindex="-1" role="radiogroup" id="versionChip">
         </div>
@@ -44,7 +44,7 @@
 
 
 
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-1">
             <span class="text-white" style="font-size: large;">Project</span>
         </div>
@@ -62,7 +62,7 @@
             <select id="versionTab" class="form-select" style="width: fit-content;">
             </select>
         </div>
-    </div>
+    </div> -->
 
     <div class="separator"></div>
 
@@ -148,32 +148,6 @@
             // })
 
         });
-
-        $('#versionTab').on('change', function () {
-            allData = [];
-            if (this.value === '') {
-                $('#dataUser').text('');
-                return;
-            }
-            // get data 1
-            let project = $('#projectTab').find(":selected").val();
-            const db = firebase.app(project).database();
-            db.goOnline();
-
-
-            db.ref().child(this.value).child("userdata").get().then((snapshot) => {
-                if (snapshot.exists()) {
-                    $('#dataUser').text(JSON.stringify(snapshot.val()));
-                    console.log(snapshot.val());
-                    allData = snapshot.val();
-                    drawChart();
-                } else {
-                    console.log("Current have 0 record.");
-                }
-            }).catch((error) => {
-                console.error(error);
-            });
-        });
     });
 
     async function getData() {
@@ -234,7 +208,23 @@
     }
 
     function getDataByVersion(version) {
-        alert(version);
+        allData = [];
+        // get data 1
+        let project = $('input[name=project]:checked').val();
+        const db = firebase.app(project).database();
+        db.goOnline();
+
+        db.ref().child(version).child("userdata").get().then((snapshot) => {
+            if (snapshot.exists()) {
+                $('#dataUser').text(JSON.stringify(snapshot.val()));
+                allData = snapshot.val();
+                drawChart();
+            } else {
+                console.log("Current have 0 record.");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
     }
 
 
