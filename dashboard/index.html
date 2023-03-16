@@ -20,11 +20,7 @@
 
 <div class="page-content p-5" id="content">
 
-    <div class="overlay" id="loaderOverlay" hidden>
-        <div class="overlay__inner">
-            <div class="overlay__content"><span class="spinner"></span></div>
-        </div>
-    </div>
+    <div class="loading style-2" id="loaderOverlay"><div class="loading-wheel"></div></div>
 
 
 
@@ -152,6 +148,7 @@
     }
 
     function updateVersion(project) {
+        $('#loaderOverlay').show();
         //alert(project);
         $('#dataUser').text('');
         $('#versionChip').children().remove()
@@ -167,6 +164,7 @@
                 <span>${item}</span>
             </div>`;
                 $('#versionChip').append(htmlPattern);
+                $('#loaderOverlay').hide();
             });
         });
     }
