@@ -195,8 +195,8 @@
             defaultProject = keystr;
 
             let htmlPattern = `<div class="chip chip-checkbox" aria-labelledby="${keystr}" tabindex="0" role="radio"
-                aria-checked="false">
-                <input type="radio" id="${keystr}" name="project" value="${keystr}" onclick="updateVersion('${keystr}')"/>
+                aria-checked="false" onclick="updateVersion('${keystr}')">
+                <input type="radio" id="${keystr}" name="project" value="${keystr}"/>
                 <span>${keystr}</span>
             </div>`;
             $('#projectChip').append(htmlPattern);
@@ -207,7 +207,26 @@
     }
 
     function updateVersion(project) {
-        alert(project);
+        //alert(project);
+        $('#dataUser').text('');
+        const db = firebase.app(project).database();
+        db.goOnline();
+        let versionOption = document.getElementById('versionTab');
+        $('#versionTab').find('option').remove().end();
+        let opt = document.createElement('option');
+        opt.value = '';
+        opt.innerHTML = '';
+        versionOption.appendChild(opt);
+        let ref = db.ref().orderByKey();
+        ref.once('value', (snapshot) => {
+            const versions = Object.keys(snapshot.val());
+            versions.forEach(function (item, index) {
+                var opt = document.createElement('option');
+                opt.value = item;
+                opt.innerHTML = item;
+                versionOption.appendChild(opt);
+            });
+        });
     }
 
 
