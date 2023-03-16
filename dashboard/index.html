@@ -204,7 +204,7 @@
 
         });
         $('input:radio[name=project]').change(function () {
-            alert($('input[name=project]:checked').val());
+            alert(this.value);
         });
 
         return firstKey;
